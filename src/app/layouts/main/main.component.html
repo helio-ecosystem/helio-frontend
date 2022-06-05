@@ -15,7 +15,11 @@
       <a mat-list-item routerLink="/components">Components</a>
 
     </mat-nav-list>
+
+    <div class="footer-container"><app-footer></app-footer></div>
+    
   </mat-sidenav>
+      
   <mat-sidenav-content>
 
     <mat-toolbar color="primary">
@@ -36,8 +40,10 @@
      <!-- Page content-->
     <div class="content-wrapper">
       <router-outlet></router-outlet>    
+      
+  
     </div>
-    
+
   </mat-sidenav-content>
-  <footer class="footer-container" app-footer></footer>
+
 </mat-sidenav-container>

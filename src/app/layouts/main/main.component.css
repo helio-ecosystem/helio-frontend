@@ -19,3 +19,9 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.footer-container {
+  position: absolute;
+  margin: 10px;
+  bottom: 0;
+}
