@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Helio</mat-toolbar>
+    <mat-nav-list>
+<!--
+      <ng-container *ngFor="let item of itemsMenu">
+        <a mat-list-item routerLink="{{ item.uri }}" *ngIf="!item.header">{{ item.tittle }}</a>
+      </ng-container>
+-->
+
+      <a mat-list-item routerLink="/home">Home</a>
+      <a mat-list-item routerLink="/components">Components</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{ sectionTitle }}</span>
+      <span class="example-spacer"></span>
+      <a mat-button target="_blank" href="https://github.com/helio-ecosystem"><mat-icon>circle</mat-icon></a>
+      
+    </mat-toolbar>
+
+     <!-- Page content-->
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>    
+    </div>
+    
+  </mat-sidenav-content>
+  <footer class="footer-container" app-footer></footer>
+</mat-sidenav-container>

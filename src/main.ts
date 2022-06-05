@@ -8,5 +8,11 @@ if (environment.production) {
   enableProdMode();
 }
 
+
+let p = platformBrowserDynamic().bootstrapModule(AppModule);
+p.then(() => { (<any>window).appBootstrap && (<any>window).appBootstrap(); })
+
+/*
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+*/
