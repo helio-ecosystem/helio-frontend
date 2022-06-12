@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentModel } from 'src/app/models/component';
-import { HelioService } from 'src/app/services/helio.service';
+import { ComponentService } from 'src/app/services/component.service';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -12,15 +12,15 @@ export class ComponentListComponent {
     columns = ['class', 'type', 'source'];
     data;
     error: string = '';
-    
-    constructor(private settings: SettingsService, private service: HelioService) {
+
+    constructor(private settings: SettingsService, private service: ComponentService) {
         this.settings.setSection('Component list');
         this.search();
     }
 
     search() {
         this.error = '';
-        this.service.componentList().subscribe({
+        this.service.list().subscribe({
            next: (v) => this.toTableData(v),
            error: (e) => this.error = 'Cannot retrieve component list'
         });
@@ -28,9 +28,9 @@ export class ComponentListComponent {
 
     private toTableData(sourceData: any[]) {
         this.data = [];
-        sourceData.forEach(s => { 
+        sourceData.forEach(s => {
             var d: ComponentModel = new ComponentModel(JSON.parse(JSON.stringify(s)));
-            this.data.push([d.getClazz(), d.getType(), d.getSource()]); 
+            this.data.push([d.getClazz(), d.getType(), d.getSource()]);
         });
     }
 

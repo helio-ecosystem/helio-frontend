@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { RestService } from './rest.service';
 import { ComponentModel } from '../models/component';
+import {TranslationModel} from "../models/translation";
 
 @Injectable({
   providedIn: 'root'
 })
-export class HelioService extends RestService {
+export class ComponentService extends RestService {
 
-  componentList(): Observable<ComponentModel[]> {
+  list(): Observable<ComponentModel[]> {
     return super.get('/component');
   }
 

@@ -13,13 +13,14 @@
 
       <a mat-list-item routerLink="/home">Home</a>
       <a mat-list-item routerLink="/components">Components</a>
+      <a mat-list-item routerLink="/translations">Translations</a>
 
     </mat-nav-list>
 
     <div class="footer-container"><app-footer></app-footer></div>
-    
+
   </mat-sidenav>
-      
+
   <mat-sidenav-content>
 
     <mat-toolbar color="primary">
@@ -34,14 +35,14 @@
       <span>{{ sectionTitle }}</span>
       <span class="example-spacer"></span>
       <a mat-button target="_blank" href="https://github.com/helio-ecosystem"><mat-icon>circle</mat-icon></a>
-      
+
     </mat-toolbar>
 
      <!-- Page content-->
     <div class="content-wrapper">
-      <router-outlet></router-outlet>    
-      
-  
+      <router-outlet></router-outlet>
+
+
     </div>
 
   </mat-sidenav-content>
