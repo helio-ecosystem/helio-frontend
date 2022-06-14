@@ -10,7 +10,7 @@ import {TranslationService} from "../../../services/translation.service";
 })
 export class TranslationListComponent {
 
-  columns = ['id'];
+  columns = ['id', 'processor', 'threads assigned'];
   data;
   error: string = '';
 
@@ -31,7 +31,13 @@ export class TranslationListComponent {
     this.data = [];
     sourceData.forEach(s => {
       var d: TranslationModel = new TranslationModel(JSON.parse(JSON.stringify(s)));
-      this.data.push([d.getId()]);
+      this.data.push([d.getId(), d.getMappingProcessor(), d.getThreads()]);
     });
   }
+
+  rowSelected(row: any[]): void {
+    var selected = row[0];
+    console.log("Row clicked! " + selected);
+  }
+
 }

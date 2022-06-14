@@ -1,7 +1,7 @@
 <div class="row m-3">
   <div class="col-12">
     <div class="mat-elevation-z8">
-      <app-table [columns]="columns" [data]="data" *ngIf="data"></app-table>
+      <app-table [columns]="columns" [data]="data" (rowClick)="rowSelected($event)" *ngIf="data"></app-table>
     </div>
   </div>
 </div>

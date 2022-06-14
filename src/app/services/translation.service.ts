@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
-import { ComponentModel } from '../models/component';
-import {TranslationModel} from "../models/translation";
+import { TranslationModel } from "../models/translation";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +20,12 @@ export class TranslationService extends RestService {
     super.delete('/api/' + data.getId());
   }
 
-  details(id: string): Observable<TranslationModel> {
-    return super.get('/api/' + id);
+  mappingDetails(id: string): Observable<TranslationModel> {
+    return super.get('/api/' + id + '/mapping');
+  }
+
+  dataValue(id: string): Observable<any> {
+    return super.get('/api/' + id + '/data');
   }
 
 }
