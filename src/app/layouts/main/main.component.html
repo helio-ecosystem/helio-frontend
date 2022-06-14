@@ -11,9 +11,32 @@
       </ng-container>
 -->
 
-      <a mat-list-item routerLink="/home">Home</a>
-      <a mat-list-item routerLink="/components">Components</a>
-      <a mat-list-item routerLink="/translations">Translations</a>
+      <mat-list-item>
+        <mat-icon matListIcon>home</mat-icon>
+        <a routerLink="/home">Home</a>
+      </mat-list-item>
+
+
+      <mat-list-item>
+        <mat-icon matListIcon>view_module</mat-icon>
+        <span>Components</span>
+      </mat-list-item>
+
+      <mat-list-item [ngStyle]="{ 'padding-left': '30px' }">
+        <a matLine routerLink="/components">List</a>
+      </mat-list-item>
+
+
+      <mat-list-item>
+        <mat-icon matListIcon>insert_drive_file</mat-icon>
+        <span>Translations</span>
+      </mat-list-item>
+
+      <mat-list-item [ngStyle]="{ 'padding-left': '30px' }">
+        <a matLine routerLink="/translations">List</a>
+      </mat-list-item>
+
+
 
     </mat-nav-list>
 
