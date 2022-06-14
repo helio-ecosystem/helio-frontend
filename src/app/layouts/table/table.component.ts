@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
@@ -18,6 +18,8 @@ export class TableComponent implements OnInit, AfterViewInit {
   @Input() columns;
   @Input() data;
 
+  @Output() rowClick = new EventEmitter<any>();
+
   ngOnInit() {
     this.dataSource = new TableDataSource(this.data);
   }
@@ -27,4 +29,9 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
+
+  onRowClicked(row: any): void {
+    this.rowClick.emit(row);
+  }
+
 }
