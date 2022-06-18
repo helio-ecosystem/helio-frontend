@@ -2,7 +2,8 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [opened]="(isHandset$ | async) === false"
+               style="background-color: darkslategray; color: white">
     <mat-toolbar>Helio</mat-toolbar>
     <mat-nav-list>
 <!--
@@ -11,31 +12,27 @@
       </ng-container>
 -->
 
+
       <mat-list-item>
         <mat-icon matListIcon>home</mat-icon>
-        <a routerLink="/home">Home</a>
+        <a matLine routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
       </mat-list-item>
 
 
       <mat-list-item>
-        <mat-icon matListIcon>view_module</mat-icon>
-        <span>Components</span>
-      </mat-list-item>
-
-      <mat-list-item [ngStyle]="{ 'padding-left': '30px' }">
-        <a matLine routerLink="/components">List</a>
+        <mat-icon matListIcon>storefront</mat-icon>
+        <a matLine routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
       </mat-list-item>
 
 
       <mat-list-item>
         <mat-icon matListIcon>insert_drive_file</mat-icon>
-        <span>Translations</span>
+        <span matLine>Translations</span>
       </mat-list-item>
 
       <mat-list-item [ngStyle]="{ 'padding-left': '30px' }">
-        <a matLine routerLink="/translations">List</a>
+        <a matLine routerLink="/translations" (click)="drawer.mode == 'over' ? drawer.close() : ''">List</a>
       </mat-list-item>
-
 
 
     </mat-nav-list>
@@ -63,9 +60,7 @@
 
      <!-- Page content-->
     <div class="content-wrapper">
-      <router-outlet></router-outlet>
-
-
+        <router-outlet></router-outlet>
     </div>
 
   </mat-sidenav-content>

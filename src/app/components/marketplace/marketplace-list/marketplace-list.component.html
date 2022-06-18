@@ -1,0 +1,52 @@
+<div class="container-fluid mt-3">
+
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button mat-flat-button class="bg-success" style="color: white; margin-right: 20px">
+        <mat-icon matListIcon matLine>add</mat-icon> Add new component
+      </button>
+      <button mat-flat-button class="bg-primary" style="color: white">
+        <mat-icon matListIcon matLine>refresh</mat-icon> Refresh
+      </button>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-4 mb-3" *ngFor="let component of componentsInstalled" (mouseover)="hover = component.getClazz()" (mouseleave)="hover = ''">
+
+      <mat-card [ngClass]="{'mat-elevation-z8': hover == component.getClazz()}">
+        <mat-card-title>
+          <span class="mat-title">{{ component.getName() }}</span>
+        </mat-card-title>
+
+        <mat-card-content class="mt-3">
+
+          <div class="row">
+            <div class="col-8 col-xs-12 mb-3 text-wrap">
+              <span class="mat-card-subtitle">Class</span>
+              <span>{{ component.getClazz() }}</span>
+            </div>
+            <div class="col-4 col-xs-12 mb-3 text-wrap">
+              <span class="mat-card-subtitle">Type</span>
+              <span>{{ component.getType() }}</span>
+            </div>
+            <div class="col-12">
+              <span class="mat-card-subtitle">Source</span>
+              <a matLine>{{ component.getSource() }}</a>
+            </div>
+          </div>
+
+        </mat-card-content>
+
+        <mat-card-footer></mat-card-footer>
+      </mat-card>
+
+    </div>
+
+
+
+  </div>
+
+</div>

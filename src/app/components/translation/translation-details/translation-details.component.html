@@ -1,0 +1,46 @@
+
+<div class="content-heading">
+  Translation details
+</div>
+
+
+<ng-container *ngIf="error == null">
+
+
+  <div class="card card-default">
+    <div class="card-header">
+      Device configuration
+    </div>
+    <div class="card-body">
+
+
+      <app-translation-template [translation]="translation"></app-translation-template>
+
+      <h3>Data</h3>
+
+      <button (click)="executeTranslate()">Execute translation</button>
+
+      <br><br><br>
+
+      <p *ngIf="loading">Executing translation...</p>
+
+      <p *ngIf="!loading && data == null && errorData == null">No data received from this translation</p>
+
+      <p *ngIf="errorData != null">
+        Error when executing the translation: <br>
+        <span>{{ errorData }}</span>
+      </p>
+
+      <p *ngIf="data != null">{{ data }}</p>
+    </div>
+  </div>
+
+
+</ng-container>
+
+
+
+<ng-container *ngIf="error != null">
+  <span>{{ error }}</span>
+  <p>Go to <a routerLink="/translations">Translation List</a></p>
+</ng-container>

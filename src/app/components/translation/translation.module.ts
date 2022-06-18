@@ -5,10 +5,13 @@ import { LayoutsModule } from 'src/app/layouts/layouts.module';
 import { CommonModule } from '@angular/common';
 import {TranslationListComponent} from "./translation-list/translation-list.component";
 import { TranslationFormComponent } from './translation-form/translation-form.component';
+import { TranslationDetailsComponent } from './translation-details/translation-details.component';
+import { TranslationTemplateComponent } from './translation-template/translation-template.component';
 
 // This Module's Components
 const routes: Routes = [
   { path: '', component: TranslationListComponent },
+  { path: 'details/:id', component: TranslationDetailsComponent },
 ];
 
 @NgModule({
@@ -20,6 +23,8 @@ const routes: Routes = [
     declarations: [
       TranslationListComponent,
       TranslationFormComponent,
+      TranslationDetailsComponent,
+      TranslationTemplateComponent,
     ],
     exports: [
         RouterModule,

@@ -1,13 +1,24 @@
 export class ComponentModel {
-    
+
+    private name: string;
     private source: string;
     private clazz: string;
     private type: string;
 
-    constructor({ source, clazz, type}) {
+    constructor({ source, clazz, type }) {
         this.source = source;
         this.clazz = clazz;
         this.type = type;
+        // Extract repository name by regex
+        this.name = source.match('^.*\\/helio-ecosystem\\/([^\\/]*).*$')[1];
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+
+    public setName(name: string): void {
+        this.name = name;
     }
 
     public getSource(): string {

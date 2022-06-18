@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {SettingsService} from "../../../services/settings.service";
 import {TranslationModel} from "../../../models/translation";
 import {TranslationService} from "../../../services/translation.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-translation-list',
@@ -14,7 +15,10 @@ export class TranslationListComponent {
   data;
   error: string = '';
 
-  constructor(private settings: SettingsService, private service: TranslationService) {
+  constructor(
+    private settings: SettingsService,
+    private service: TranslationService,
+    private router: Router) {
     this.settings.setSection('Translation list');
     this.search();
   }
@@ -38,6 +42,8 @@ export class TranslationListComponent {
   rowSelected(row: any[]): void {
     var selected = row[0];
     console.log("Row clicked! " + selected);
+    this.router.navigate(['/translations/details/' + selected]);
+
   }
 
 }

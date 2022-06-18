@@ -8,7 +8,7 @@ export const routes = [
         component: MainComponent,
         children: [
             { path: 'home', loadChildren: () => import('../components/home/home.module').then(m => m.HomeModule) },
-            { path: 'components', loadChildren: () => import('../components/component/component.module').then(m => m.ComponentModule) },
+            { path: 'marketplace', loadChildren: () => import('../components/marketplace/marketplace.module').then(m => m.MarketplaceModule) },
             { path: 'translations', loadChildren: () => import('../components/translation/translation.module').then(m => m.TranslationModule) }
         ]
     },
