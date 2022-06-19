@@ -1,39 +1,41 @@
+
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
-               style="background-color: darkslategray; color: white">
-    <mat-toolbar>Helio</mat-toolbar>
-    <mat-nav-list>
-<!--
-      <ng-container *ngFor="let item of itemsMenu">
-        <a mat-list-item routerLink="{{ item.uri }}" *ngIf="!item.header">{{ item.tittle }}</a>
-      </ng-container>
--->
+      style="background-color: #34515e; color: white">
+<!-- #2F4050 -->
+    <mat-toolbar>
+      <img class="img-fluid mt-5 rounded mx-auto d-block" style="height: 60px" src="assets/img/helio.png" />
+    </mat-toolbar>
 
+    <mat-nav-list class="mt-5">
 
-      <mat-list-item>
+      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Home', 'item-menu': sectionTitle != 'Home' }">
         <mat-icon matListIcon>home</mat-icon>
-        <a matLine routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
+        <a style="margin-left: 10px" routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
       </mat-list-item>
 
-
-      <mat-list-item>
+      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
         <mat-icon matListIcon>storefront</mat-icon>
-        <a matLine routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
+        <a style="margin-left: 10px" routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
       </mat-list-item>
 
-
-      <mat-list-item>
-        <mat-icon matListIcon>insert_drive_file</mat-icon>
-        <span matLine>Translations</span>
-      </mat-list-item>
-
-      <mat-list-item [ngStyle]="{ 'padding-left': '30px' }">
-        <a matLine routerLink="/translations" (click)="drawer.mode == 'over' ? drawer.close() : ''">List</a>
-      </mat-list-item>
-
+      <mat-expansion-panel class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
+        <mat-expansion-panel-header>
+          <mat-panel-title [ngClass]="{'item-menu': true, 'mat-list-item-content': true}">
+              <mat-icon matListIcon>insert_drive_file</mat-icon>
+              <span style="margin-left: 10px">Translations</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list style="background-color: white" class="rounded">
+          <mat-list-item [ngClass]="{'child-item-selected': sectionTitle === 'Translation list', 'child-item-menu': sectionTitle != 'Translation list' }">
+            <a matLine routerLink="/translations" (click)="drawer.mode == 'over' ? drawer.close() : ''">List</a>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
 
     </mat-nav-list>
 
@@ -43,7 +45,7 @@
 
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary">
+    <mat-toolbar style="background-color: #209CEE; color: white" *ngIf="drawer.mode == 'over'">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -54,11 +56,9 @@
       </button>
       <span>{{ sectionTitle }}</span>
       <span class="example-spacer"></span>
-      <a mat-button target="_blank" href="https://github.com/helio-ecosystem"><mat-icon>circle</mat-icon></a>
 
     </mat-toolbar>
 
-     <!-- Page content-->
     <div class="content-wrapper">
         <router-outlet></router-outlet>
     </div>

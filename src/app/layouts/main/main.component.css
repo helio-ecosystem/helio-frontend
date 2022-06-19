@@ -22,6 +22,28 @@
 
 .footer-container {
   position: absolute;
-  margin: 10px;
   bottom: 0;
+  width: 100%;
+}
+
+.item-selected, .item-menu:hover {
+  color: white;
+}
+
+.item-menu {
+  color: gray;
+}
+
+.content-wrapper {
+  background-color: #f8f9fc;
+}
+
+.child-item-menu:hover {
+  color: darkgray;
+}
+.child-item-menu {
+  color: black;
+}
+.child-item-selected {
+  color: #3f51b5;
 }

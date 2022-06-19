@@ -17,22 +17,24 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TableComponent } from './table/table.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
-    imports: [
-      CommonModule,
-      RouterModule,
-      MatMenuModule,
-      MatIconModule,
-      LayoutModule,
-      MatToolbarModule,
-      MatButtonModule,
-      MatSidenavModule,
-      MatListModule,
-      MatTableModule,
-      MatPaginatorModule,
-      MatSortModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatMenuModule,
+    MatIconModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatExpansionModule
+  ],
     declarations: [
         FooterComponent,
         MainComponent,

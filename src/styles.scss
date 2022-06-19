@@ -4,4 +4,33 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #858796;
+  text-align: left;
+  background-color: #fff;
+}
+
+.success-btn {
+  background-color: #4caf50;
+  color: white;
+}
+.success-btn:hover {
+  background-color: #087f23;
+  color: white;
+}
+
+
+.info-btn {
+  background-color: #209CEE;
+  color: white;
+}
+.info-btn:hover {
+  background-color: #006ebb;
+  color: white;
+}
+
+
+
+

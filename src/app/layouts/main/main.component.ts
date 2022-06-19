@@ -13,6 +13,8 @@ import {MatSidenav} from "@angular/material/sidenav";
 })
 export class MainComponent {
 
+  translationSection = false;
+
   @ViewChild('drawer') drawer: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
