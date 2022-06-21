@@ -9,7 +9,7 @@ import {TranslationModel} from "../models/translation";
 })
 export class ComponentService extends RestService {
 
-  list(): Observable<ComponentModel[]> {
+  list(): Observable<any[]> {
     return super.get('/component');
   }
 

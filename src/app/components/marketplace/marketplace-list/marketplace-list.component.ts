@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ComponentModel} from "../../../models/component";
 import {SettingsService} from "../../../services/settings.service";
 import {ComponentService} from "../../../services/component.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MarketplaceFormDialogComponent} from "../marketplace-form-dialog/marketplace-form-dialog.component";
 
 @Component({
   templateUrl: './marketplace-list.component.html',
@@ -11,12 +13,15 @@ export class MarketplaceListComponent {
 
   componentsInstalled: ComponentModel[];
   componentsAvailable: ComponentModel[];
-  columnsRows = ['name', 'class', 'type', 'source'];
   rowData: any[];
   error: string;
   hover: string = '';
 
-  constructor(private settings: SettingsService, private service: ComponentService) {
+  constructor(
+    private settings: SettingsService,
+    private service: ComponentService,
+    private dialog: MatDialog)
+  {
     this.settings.setSection('Marketplace');
     this.search();
   }
@@ -28,20 +33,20 @@ export class MarketplaceListComponent {
     this.error = null;
 
     this.service.list().subscribe({
-      next: (v) => { this.componentsInstalled = v; this.toTableData(v); },
+      next: (v) => v.forEach(item => this.componentsInstalled.push(new ComponentModel(item)) ),
       error: (e) => this.error = 'Cannot retrieve components installed'
     });
 
-    this.componentsInstalled = this.dummy;
-    this.toTableData(this.dummy);
+    //this.componentsInstalled = this.dummy;
   }
 
-  private toTableData(sourceData: any[]) {
-    sourceData.forEach(s => {
-      var d: ComponentModel = new ComponentModel(JSON.parse(JSON.stringify(s)));
-      this.rowData.push([d.getName(), d.getClazz(), d.getType(), d.getSource()]);
+  create() {
+    const dialogRef = this.dialog.open(MarketplaceFormDialogComponent, {
+      width: '300px'
     });
+    //dialogRef.afterClosed().subscribe(() => console.log('Dialogo cerrado'));
   }
+
 
 
 

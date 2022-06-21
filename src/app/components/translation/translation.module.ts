@@ -7,6 +7,10 @@ import {TranslationListComponent} from "./translation-list/translation-list.comp
 import { TranslationFormComponent } from './translation-form/translation-form.component';
 import { TranslationDetailsComponent } from './translation-details/translation-details.component';
 import { TranslationTemplateComponent } from './translation-template/translation-template.component';
+import { TranslationFormDialogComponent } from './translation-form-dialog/translation-form-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatLineModule} from "@angular/material/core";
 
 // This Module's Components
 const routes: Routes = [
@@ -16,15 +20,19 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-      LayoutsModule,
-      CommonModule,
-      RouterModule.forChild(routes)
+        LayoutsModule,
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatButtonModule,
+        MatIconModule,
+        MatLineModule
     ],
     declarations: [
       TranslationListComponent,
       TranslationFormComponent,
       TranslationDetailsComponent,
       TranslationTemplateComponent,
+      TranslationFormDialogComponent,
     ],
     exports: [
         RouterModule,

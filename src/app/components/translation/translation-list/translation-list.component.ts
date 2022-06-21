@@ -3,6 +3,11 @@ import {SettingsService} from "../../../services/settings.service";
 import {TranslationModel} from "../../../models/translation";
 import {TranslationService} from "../../../services/translation.service";
 import {Router} from "@angular/router";
+import {
+  MarketplaceFormDialogComponent
+} from "../../marketplace/marketplace-form-dialog/marketplace-form-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {TranslationFormDialogComponent} from "../translation-form-dialog/translation-form-dialog.component";
 
 @Component({
   selector: 'app-translation-list',
@@ -18,7 +23,9 @@ export class TranslationListComponent {
   constructor(
     private settings: SettingsService,
     private service: TranslationService,
-    private router: Router) {
+    private router: Router,
+    private dialog: MatDialog)
+  {
     this.settings.setSection('Translation list');
     this.search();
   }
@@ -30,6 +37,16 @@ export class TranslationListComponent {
       error: (e) => this.error = 'Cannot retrieve translation list'
     });
   }
+
+
+  create() {
+    const dialogRef = this.dialog.open(TranslationFormDialogComponent, {
+      width: '300px'
+    });
+    //dialogRef.afterClosed().subscribe(() => console.log('Dialogo cerrado'));
+  }
+
+
 
   private toTableData(sourceData: any[]) {
     this.data = [];
