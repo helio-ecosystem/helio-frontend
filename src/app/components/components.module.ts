@@ -4,6 +4,7 @@ import { HomeModule } from './home/home.module';
 import { MarketplaceModule } from "./marketplace/marketplace.module";
 import { LayoutsModule } from "../layouts/layouts.module";
 import { TranslationModule } from "./translation/translation.module";
+import { PlaygroundModule } from "./playground/playground.module";
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { TranslationModule } from "./translation/translation.module";
       HomeModule,
       MarketplaceModule,
       TranslationModule,
+      PlaygroundModule,
       ErrorModule
     ],
     declarations: [],
