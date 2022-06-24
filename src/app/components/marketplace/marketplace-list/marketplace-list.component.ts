@@ -34,7 +34,7 @@ export class MarketplaceListComponent {
 
     this.service.list().subscribe({
       next: (v) => v.forEach(item => this.componentsInstalled.push(new ComponentModel(item)) ),
-      error: (e) => this.error = 'Cannot retrieve components installed'
+      error: (e) => this.error = 'Cannot retrieve components installed. Try again with refresh button.'
     });
 
     //this.componentsInstalled = this.dummy;

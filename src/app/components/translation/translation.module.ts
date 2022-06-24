@@ -11,6 +11,7 @@ import { TranslationFormDialogComponent } from './translation-form-dialog/transl
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatLineModule} from "@angular/material/core";
+import {MatCardModule} from "@angular/material/card";
 
 // This Module's Components
 const routes: Routes = [
@@ -19,14 +20,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        LayoutsModule,
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatButtonModule,
-        MatIconModule,
-        MatLineModule
-    ],
+  imports: [
+    LayoutsModule,
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatButtonModule,
+    MatIconModule,
+    MatLineModule,
+    MatCardModule
+  ],
     declarations: [
       TranslationListComponent,
       TranslationFormComponent,

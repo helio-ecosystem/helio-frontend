@@ -15,11 +15,21 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-12 border">
-      <app-table [columns]="columns" [data]="data" (rowClick)="rowSelected($event)" *ngIf="data"></app-table>
+  <div class="row" *ngIf="!error && data">
+    <div class="col-12 border">
+        <app-table [columns]="columns" [data]="data" (rowClick)="rowSelected($event)" *ngIf="data"></app-table>
+    </div>
   </div>
-</div>
+
+
+  <div class="row" *ngIf="error">
+    <div class="col-12">
+
+      <h2 class="mat-title text-danger">Error</h2>
+
+      <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
+    </div>
+  </div>
 
 
 </div>

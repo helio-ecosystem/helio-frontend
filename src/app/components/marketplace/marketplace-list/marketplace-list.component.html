@@ -50,6 +50,18 @@
 
 
 
+    <div class="row" *ngIf="error">
+      <div class="col-12">
+
+        <h2 class="mat-title text-danger">Error</h2>
+
+        <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
+      </div>
+    </div>
+
+
+    <!--
+
     <div class="col-12" *ngIf="error">
       <mat-card>
         <mat-card-title>
@@ -64,7 +76,7 @@
       </mat-card>
 
     </div>
-
+-->
 
   </div>
 

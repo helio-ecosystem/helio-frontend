@@ -1,46 +1,67 @@
+<div class="container-fluid">
 
-<div class="content-heading">
-  Translation details
-</div>
-
-
-<ng-container *ngIf="error == null">
-
-
-  <div class="card card-default">
-    <div class="card-header">
-      Device configuration
-    </div>
-    <div class="card-body">
-
-
-      <app-translation-template [translation]="translation"></app-translation-template>
-
-      <h3>Data</h3>
-
-      <button (click)="executeTranslate()">Execute translation</button>
-
-      <br><br><br>
-
-      <p *ngIf="loading">Executing translation...</p>
-
-      <p *ngIf="!loading && data == null && errorData == null">No data received from this translation</p>
-
-      <p *ngIf="errorData != null">
-        Error when executing the translation: <br>
-        <span>{{ errorData }}</span>
-      </p>
-
-      <p *ngIf="data != null">{{ data }}</p>
+  <div class="row pt-3 pb-3 mb-3 border-bottom" style="background-color: white">
+    <div class="col-12">
+      <h2 style="display: table-cell; vertical-align: middle;">Translation details</h2>
     </div>
   </div>
 
 
-</ng-container>
 
 
 
-<ng-container *ngIf="error != null">
-  <span>{{ error }}</span>
-  <p>Go to <a routerLink="/translations">Translation List</a></p>
-</ng-container>
+
+  <ng-container *ngIf="error == null">
+
+
+    <div class="card card-default">
+      <div class="card-header">
+        Device configuration
+      </div>
+      <div class="card-body">
+
+
+        <app-translation-template [translation]="translation"></app-translation-template>
+
+        <h3>Data</h3>
+
+        <button (click)="executeTranslate()">Execute translation</button>
+
+        <br><br><br>
+
+        <p *ngIf="loading">Executing translation...</p>
+
+        <p *ngIf="!loading && data == null && errorData == null">No data received from this translation</p>
+
+        <p *ngIf="errorData != null">
+          Error when executing the translation: <br>
+          <span>{{ errorData }}</span>
+        </p>
+
+        <p *ngIf="data != null">{{ data }}</p>
+      </div>
+    </div>
+
+
+  </ng-container>
+
+
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-12" *ngIf="error">
+
+      <h2 class="mat-title text-danger">Error</h2>
+
+      <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
+      <p class="card-subtitle mt-5">Go to <a routerLink="/translations">Translation List</a></p>
+
+    </div>
+  </div>
+
+
+</div>

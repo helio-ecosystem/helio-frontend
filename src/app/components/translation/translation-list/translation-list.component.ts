@@ -34,7 +34,7 @@ export class TranslationListComponent {
     this.error = '';
     this.service.list().subscribe({
       next: (v) => this.toTableData(v),
-      error: (e) => this.error = 'Cannot retrieve translation list'
+      error: (e) => this.error = 'Cannot retrieve translation list. Try again with refresh button.'
     });
   }
 
