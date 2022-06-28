@@ -35,8 +35,8 @@ export class TranslationService extends RestService {
     return observerTranslations;
   }
 
-  add(data: TranslationModel): void {
-    super.post('/api/' + data.getId(), data.getBody());
+  add(data: TranslationModel): Observable<any> {
+    return super.post('/api/' + data.getId(), data.getBody(), super.textHeaders);
   }
 
   remove(data: TranslationModel): void {

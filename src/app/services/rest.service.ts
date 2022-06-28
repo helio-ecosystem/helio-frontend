@@ -20,7 +20,7 @@ export class RestService {
 
   protected textHeaders = {
     headers: new HttpHeaders({
-      'Content-Type': 'text/html; charset=utf-8',
+      'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'no-cache',
       Pragma: 'no-cache'
     })

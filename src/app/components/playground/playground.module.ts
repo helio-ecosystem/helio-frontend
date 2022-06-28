@@ -10,6 +10,7 @@ import {MatCardModule} from "@angular/material/card";
 import {PlaygroundTemplateComponent} from "./playground-template/playground-template.component";
 import { PlaygroundHomeComponent } from './playground-home/playground-home.component';
 import { PlaygroundTourComponent } from './playground-tour/playground-tour.component';
+import {FormsModule} from "@angular/forms";
 
 // This Module's Components
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatLineModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule
   ],
     declarations: [
       PlaygroundTemplateComponent,
