@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Hello world!",
+    "description": "This is an description for Hello world",
+    "translation_template": "helloooooo",
+    "expected_results": "Hello world!"
+  },
+  {
+    "name": "Retrieve data",
+    "description": "This is an description for retrieve data",
+    "translation_template": "retrieved!",
+    "expected_results": "retrieved!"
+  },
+  {
+    "name": "Posting data",
+    "description": "This is an description for posting data",
+    "translation_template": "posted!",
+    "expected_results": "posted!"
+  }
+]
