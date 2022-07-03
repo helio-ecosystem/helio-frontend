@@ -15,7 +15,8 @@ export class RestService {
       'Content-Type': 'application/json',
       'Cache-Control': 'no-cache',
       Pragma: 'no-cache'
-    })
+    }),
+    responseType: 'json'
   };
 
   protected textHeaders = {
@@ -23,12 +24,13 @@ export class RestService {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'no-cache',
       Pragma: 'no-cache'
-    })
+    }),
+    responseType: 'text'
   };
 
   constructor(protected http: HttpClient) { }
 
-  protected get(uri: string, headers?): Observable<any> {
+  protected get(uri: string, headers?: any): Observable<any> {
     return this.http.get(this.host + uri, headers != null ? headers : this.jsonHeaders);
   }
 

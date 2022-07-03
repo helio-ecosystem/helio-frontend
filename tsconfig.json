@@ -21,7 +21,8 @@
     "module": "es2020",
     "lib": [
       "es2020",
-      "dom"
+      "dom",
+      "ES2021.String"
     ],
     "resolveJsonModule": true, // For reading JSON files
     "esModuleInterop": true, // For reading JSON files

@@ -36,7 +36,7 @@ export class TranslationService extends RestService {
   }
 
   add(data: TranslationModel): Observable<any> {
-    return super.post('/api/' + data.getId(), data.getBody(), super.textHeaders);
+    return super.post('/api/' + data.getId(), data.getBody(), this.textHeaders);
   }
 
   remove(data: TranslationModel): void {
@@ -44,11 +44,11 @@ export class TranslationService extends RestService {
   }
 
   mappingDetails(id: string): Observable<any> {
-    return super.get('/api/' + id + '/mapping', super.textHeaders);
+    return super.get('/api/' + id + '/mapping', this.textHeaders);
   }
 
   dataValue(id: string): Observable<any> {
-    return super.get('/api/' + id + '/data');
+    return super.get('/api/' + id + '/data', this.textHeaders);
   }
 
 }
