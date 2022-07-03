@@ -10,11 +10,15 @@ import {MatCardModule} from "@angular/material/card";
 import {PlaygroundTemplateComponent} from "./playground-template/playground-template.component";
 import { PlaygroundHomeComponent } from './playground-home/playground-home.component';
 import { PlaygroundTourComponent } from './playground-tour/playground-tour.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CodeEditorModule } from '@ngstack/code-editor';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 // This Module's Components
 const routes: Routes = [
   { path: '', component: PlaygroundHomeComponent },
+  { path: 'tour', pathMatch: 'full', component: PlaygroundTourComponent },
   { path: 'tour/:id', component: PlaygroundTourComponent },
 ];
 
@@ -27,7 +31,11 @@ const routes: Routes = [
     MatIconModule,
     MatLineModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CodeEditorModule.forRoot(),
+    MatProgressBarModule,
+    MatExpansionModule
   ],
     declarations: [
       PlaygroundTemplateComponent,
