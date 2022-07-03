@@ -5,10 +5,10 @@
       <h2 style="display: table-cell; vertical-align: middle;">Components installed</h2>
     </div>
     <div class="col-5" style="text-align: right">
-      <button mat-flat-button class="success-btn" style="margin-right: 20px" (click)="create()">
-        <mat-icon matListIcon matLine>add</mat-icon> Add new component
+      <button mat-flat-button class="success-btn" (click)="create()">
+        <mat-icon matListIcon matLine>add</mat-icon> New component
       </button>
-      <button mat-flat-button class="info-btn" (click)="search()">
+      <button mat-flat-button class="info-btn btn-space-left" (click)="search()">
         <mat-icon matListIcon matLine>refresh</mat-icon> Refresh
       </button>
     </div>
@@ -59,24 +59,6 @@
       </div>
     </div>
 
-
-    <!--
-
-    <div class="col-12" *ngIf="error">
-      <mat-card>
-        <mat-card-title>
-          <span class="mat-title text-danger">Error</span>
-        </mat-card-title>
-
-        <mat-card-content class="mt-3">
-
-          <h3>{{ error }}</h3>
-
-        </mat-card-content>
-      </mat-card>
-
-    </div>
--->
 
   </div>
 
