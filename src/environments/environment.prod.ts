@@ -3,11 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 import { environment as envDev } from "./environment";
+import {InterceptorPlaygroundService} from "../app/services/interceptor/interceptor_playground.service";
+import {InterceptorDisabledService} from "../app/services/interceptor/interceptor_disabled.service";
 
 export const environment = {
   production: true,
-  version: '0.0.1',
+  version: '0.0.2',
   host: 'http://localhost:4567',
+  interceptor: InterceptorDisabledService,
 };
 
 /*

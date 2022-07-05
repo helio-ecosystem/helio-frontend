@@ -9,6 +9,8 @@ export class PlaygroundTourService {
 
   private tourSections: PlaygroundTourSectionModel[] = [];
 
+  public static playground_translation_id = 'playground';
+
   constructor() {
     allSectionsInJsonFile.forEach((value, index: number) => this.tourSections.push(new PlaygroundTourSectionModel({
       sectionId: String(value.name).toLowerCase().replaceAll(' ', '-').replaceAll(/[^a-zA-Z\d-]/g, ''),

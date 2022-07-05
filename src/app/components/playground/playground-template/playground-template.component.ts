@@ -3,6 +3,7 @@ import { FormBuilder, FormControl } from "@angular/forms";
 import { TranslationService } from "../../../services/translation.service";
 import { TranslationModel } from "../../../models/translation";
 import {PlaygroundTourSectionModel} from "../../../models/playground-tour-section";
+import {PlaygroundTourService} from "../../../services/playground-tour.service";
 
 @Component({
   selector: 'playground-template',
@@ -20,7 +21,7 @@ export class PlaygroundTemplateComponent implements OnChanges {
   loadingTranslation: boolean;
 
   private model: TranslationModel =
-    new TranslationModel({ id: 'playground', mappingProcessor: '', threads: 1, body: '' });
+    new TranslationModel({ id: PlaygroundTourService.playground_translation_id, mappingProcessor: '', threads: 1, body: '' });
 
   constructor(
     private fb: FormBuilder,

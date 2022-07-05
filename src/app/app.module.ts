@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutesModule } from './routes/routes.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { ComponentsModule } from './components/components.module';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpInterceptor} from "@angular/common/http";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -21,7 +22,11 @@ import {HttpClientModule} from "@angular/common/http";
     RoutesModule,
     LayoutsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: environment.interceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

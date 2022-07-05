@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import {MenuService} from "../../services/menu.service";
 import { SettingsService } from 'src/app/services/settings.service';
 import {MatSidenav} from "@angular/material/sidenav";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,8 @@ import {MatSidenav} from "@angular/material/sidenav";
 export class MainComponent {
 
   translationSection = false;
+
+  displayAllMenuOptions = environment.interceptor.allOptionsMenu;
 
   @ViewChild('drawer') drawer: MatSidenav;
 

@@ -18,12 +18,12 @@
         <a style="margin-left: 10px" routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
       </mat-list-item>
 
-      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
+      <mat-list-item *ngIf="displayAllMenuOptions" [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
         <mat-icon matListIcon>storefront</mat-icon>
         <a style="margin-left: 10px" routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
       </mat-list-item>
 
-      <mat-expansion-panel class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
+      <mat-expansion-panel *ngIf="displayAllMenuOptions" class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
         <mat-expansion-panel-header>
           <mat-panel-title [ngClass]="{'item-menu': true, 'mat-list-item-content': true}">
               <mat-icon matListIcon>insert_drive_file</mat-icon>

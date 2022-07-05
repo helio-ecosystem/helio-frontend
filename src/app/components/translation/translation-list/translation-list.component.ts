@@ -8,6 +8,8 @@ import {
 } from "../../marketplace/marketplace-form-dialog/marketplace-form-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TranslationFormDialogComponent} from "../translation-form-dialog/translation-form-dialog.component";
+import {PlaygroundModule} from "../../playground/playground.module";
+import {PlaygroundTourService} from "../../../services/playground-tour.service";
 
 @Component({
   selector: 'app-translation-list',
@@ -52,7 +54,9 @@ export class TranslationListComponent {
     this.data = [];
     sourceData.forEach(s => {
       var d: TranslationModel = new TranslationModel(JSON.parse(JSON.stringify(s)));
-      this.data.push([d.getId(), d.getMappingProcessor(), d.getThreads()]);
+      if (d.getId() != PlaygroundTourService.playground_translation_id) {
+        this.data.push([d.getId(), d.getMappingProcessor(), d.getThreads()]);
+      }
     });
   }
 

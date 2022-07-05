@@ -2,13 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { environment as envDev } from "./environment";
 import {InterceptorPlaygroundService} from "../app/services/interceptor/interceptor_playground.service";
 
 export const environment = {
-  production: false,
+  production: true,
   version: '0.0.2',
   host: 'http://localhost:4567',
-  interceptor: InterceptorPlaygroundService
+  interceptor: InterceptorPlaygroundService,
 };
 
 /*
