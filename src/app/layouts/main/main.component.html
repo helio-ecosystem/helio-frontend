@@ -42,6 +42,11 @@
         <a style="margin-left: 10px" routerLink="/playground" (click)="drawer.mode == 'over' ? drawer.close() : ''">Playground</a>
       </mat-list-item>
 
+      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Tour', 'item-menu': sectionTitle != 'Tour' }">
+        <mat-icon matListIcon>science</mat-icon>
+        <a style="margin-left: 10px" routerLink="/tour" (click)="drawer.mode == 'over' ? drawer.close() : ''">Tour</a>
+      </mat-list-item>
+
     </mat-nav-list>
 
     <div class="footer-container"><app-footer></app-footer></div>

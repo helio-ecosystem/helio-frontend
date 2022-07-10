@@ -10,7 +10,8 @@ export const routes = [
             { path: 'home', loadChildren: () => import('../components/home/home.module').then(m => m.HomeModule) },
             { path: 'marketplace', loadChildren: () => import('../components/marketplace/marketplace.module').then(m => m.MarketplaceModule) },
             { path: 'translations', loadChildren: () => import('../components/translation/translation.module').then(m => m.TranslationModule) },
-            { path: 'playground', loadChildren: () => import('../components/playground/playground.module').then(m => m.PlaygroundModule) }
+            { path: 'playground', loadChildren: () => import('../components/playground/playground.module').then(m => m.PlaygroundModule) },
+            { path: 'tour', loadChildren: () => import('../components/tour/tour.module').then(m => m.TourModule) }
         ]
     },
 

@@ -15,8 +15,16 @@
   </div>
 </div>
 
+<div class="row mb-4 m-1" *ngIf="notification">
+  <div class="col-12 alert-success text-success rounded p-2">
+    <h2>Success!</h2>
+    <pre class="text-wrap">{{ notification }}</pre>
+  </div>
+</div>
+
+
   <div class="row" *ngIf="!error && data">
-    <div class="col-12 border">
+    <div class="col-12">
         <app-table [columns]="columns" [data]="data" (rowClick)="rowSelected($event)" *ngIf="data"></app-table>
     </div>
   </div>
@@ -24,10 +32,7 @@
 
   <div class="row" *ngIf="error">
     <div class="col-12">
-
-      <h2 class="mat-title text-danger">Error</h2>
-
-      <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
+      <pre class="text-wrap rounded alert-danger p-2">{{ error }}</pre>
     </div>
   </div>
 

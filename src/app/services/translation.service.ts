@@ -23,7 +23,7 @@ export class TranslationService extends RestService {
 
           // Retrieves translation mapping
           this.mappingDetails(id).subscribe({
-            next: (v2) => { translation.setBody(v2); observer.next(translation); },
+            next: (v2) => { translation.body = v2; observer.next(translation); },
             error: (e2) => observer.error('Translation was found but not it mapping (error: ' + JSON.stringify(e2) + ')')
           });
 
@@ -36,11 +36,11 @@ export class TranslationService extends RestService {
   }
 
   add(data: TranslationModel): Observable<any> {
-    return super.post('/api/' + data.getId(), data.getBody(), this.textHeaders);
+    return super.post('/api/' + data.id, data.body, this.textHeaders);
   }
 
   remove(data: TranslationModel): void {
-    super.delete('/api/' + data.getId());
+    super.delete('/api/' + data.id);
   }
 
   mappingDetails(id: string): Observable<any> {

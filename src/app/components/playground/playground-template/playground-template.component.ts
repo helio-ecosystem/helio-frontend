@@ -2,18 +2,19 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import { FormBuilder, FormControl } from "@angular/forms";
 import { TranslationService } from "../../../services/translation.service";
 import { TranslationModel } from "../../../models/translation";
-import {PlaygroundTourSectionModel} from "../../../models/playground-tour-section";
-import {PlaygroundTourService} from "../../../services/playground-tour.service";
+import {TourSectionModel} from "../../../models/tour-section";
+import {TourService} from "../../../services/tour.service";
 
 @Component({
   selector: 'playground-template',
   templateUrl: './playground-template.component.html',
   styleUrls: ['./playground-template.component.css']
 })
-export class PlaygroundTemplateComponent implements OnChanges {
+export class PlaygroundTemplateComponent implements OnInit, OnChanges {
 
+  @Input() disabledArea: boolean;
   @Input() translation: string;
-  @Input() sectionModel: PlaygroundTourSectionModel;
+  @Input() sectionModel: TourSectionModel;
 
   translationControl: FormControl;
   translationResults: string;
@@ -21,23 +22,24 @@ export class PlaygroundTemplateComponent implements OnChanges {
   loadingTranslation: boolean;
 
   private model: TranslationModel =
-    new TranslationModel({ id: PlaygroundTourService.playground_translation_id, mappingProcessor: '', threads: 1, body: '' });
+    new TranslationModel({ id: TourService.playground_translation_id, mappingProcessor: '', threads: 1, body: '' });
 
-  constructor(
-    private fb: FormBuilder,
-    private service : TranslationService) {
-    this.translationControl = this.fb.control(" ");
+  constructor(private service : TranslationService) {}
+
+  ngOnInit(): void {
+    this.translationControl = new FormControl({ value: '', disabled: this.disabledArea != null && this.disabledArea });
   }
 
+
   evaluateTranslation() {
-    this.model.setBody(this.translationControl.value);
+    this.model.body = this.translationControl.value;
     this.loadingTranslation = true;
     this.translationResults = null;
     this.translationResultsSuccess = null;
     this.service.add(this.model).subscribe({
       next: (v) => {
         this.translationResults = '';
-        this.service.dataValue(this.model.getId()).subscribe({
+        this.service.dataValue(this.model.id).subscribe({
           next: (r) => {
             this.translationResults = r.trim();
             this.translationResultsSuccess = true;
@@ -65,12 +67,12 @@ export class PlaygroundTemplateComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['translation'] || changes['sectionModel']) {
+    if (this.translationControl && (changes['translation'] || changes['sectionModel'])) {
       if (changes['translation']) {
-        this.translationControl = this.fb.control(changes['translation'].currentValue);
+        this.translationControl.setValue(changes['translation'].currentValue);
       }
       if (changes['sectionModel']) {
-        this.translationControl = this.fb.control(changes['sectionModel'].currentValue._translation);
+        this.translationControl.setValue(changes['sectionModel'].currentValue._translation);
       }
     }
   }

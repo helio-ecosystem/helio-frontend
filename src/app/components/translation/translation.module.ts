@@ -12,6 +12,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatLineModule} from "@angular/material/core";
 import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from "@angular/material/input";
+import {MatStepperModule} from '@angular/material/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import {ReactiveFormsModule} from "@angular/forms";
+import {PlaygroundModule} from "../playground/playground.module";
+import {PlaygroundTemplateComponent} from "../playground/playground-template/playground-template.component";
+import {PlaygroundExportModule} from "../playground/playground-export.module";
 
 // This Module's Components
 const routes: Routes = [
@@ -27,8 +35,17 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatLineModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    PlaygroundExportModule
   ],
+  providers: [{
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true, displayDefaultIndicatorType: false },
+  }],
     declarations: [
       TranslationListComponent,
       TranslationFormComponent,

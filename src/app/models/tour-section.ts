@@ -1,4 +1,4 @@
-export class PlaygroundTourSectionModel {
+export class TourSectionModel {
 
     private _sectionId: string;
     private _name: string;

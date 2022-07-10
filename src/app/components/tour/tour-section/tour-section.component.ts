@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
-import {PlaygroundTourService} from "../../../services/playground-tour.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PlaygroundTourSectionModel} from "../../../models/playground-tour-section";
+import { ActivatedRoute, Router } from '@angular/router';
+import { TourSectionModel } from 'src/app/models/tour-section';
+import { SettingsService } from 'src/app/services/settings.service';
+import { TourService } from 'src/app/services/tour.service';
 
 @Component({
-  templateUrl: './playground-tour.component.html',
-  styleUrls: ['./playground-tour.component.css']
+    templateUrl: 'tour-section.component.html'
 })
-export class PlaygroundTourComponent {
+export class TourSectionComponent {
 
   allSectionsEnable: boolean = true;
-  currentSection: PlaygroundTourSectionModel[] = [];
-  previousSection: PlaygroundTourSectionModel = null;
-  nextSection: PlaygroundTourSectionModel = null;
+  currentSection: TourSectionModel[] = [];
+  previousSection: TourSectionModel = null;
+  nextSection: TourSectionModel = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: PlaygroundTourService)
+    private service: TourService,
+    private settings: SettingsService)
   {
+    this.settings.setSection('Tour');
     this.route.params.subscribe(params => {
       if (params['id'] == null) {
         this.currentSection = this.service.allSections();
@@ -32,14 +34,14 @@ export class PlaygroundTourComponent {
           this.allSectionsEnable = false;
         }
         else {
-            this.router.navigate(['/playground/tour']);
+            this.router.navigate(['/tour']);
         }
       }
     });
   }
 
   public changeSection(sectionId: string) {
-    this.router.navigate(['/playground/tour/' + (sectionId != null ? sectionId : '' )]);
+    this.router.navigate(['/tour/' + (sectionId != null ? sectionId : '' )]);
   }
-
+  
 }

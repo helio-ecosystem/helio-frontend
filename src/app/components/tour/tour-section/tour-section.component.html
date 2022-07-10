@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+    <div class="row pt-3 pb-3 mb-3 border-bottom" style="background-color: white">
+      <div class="col-7">
+        <h2 style="display: table-cell; vertical-align: middle;">Playground tour{{ allSectionsEnable ? '' : ' - ' + currentSection[0].name }}</h2>
+      </div>
+  
+      <div class="col-5" style="text-align: right" *ngIf="!allSectionsEnable">
+        <button mat-stroked-button (click)="changeSection(null)">
+          Tour list
+        </button>
+        <button mat-flat-button class="btn info-btn btn-space-left" *ngIf="previousSection" (click)="changeSection(previousSection.sectionId)">
+          Previous: {{ previousSection.name }}
+        </button>
+        <button mat-flat-button class="success-btn btn-space-left" *ngIf="nextSection" (click)="changeSection(nextSection.sectionId)">
+          Next: {{ nextSection.name }}
+        </button>
+      </div>
+  
+    </div>
+  
+    <ng-container *ngIf="allSectionsEnable">
+  
+      <mat-card class="mt-3 pb-4">
+        <mat-card-content>
+          <h2 class="mb-4">Tutorial list</h2>
+  
+  
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let section of currentSection; let i = index;" class="mat-elevation-z0 border">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>{{ section.name }}</b>
+                </mat-panel-title>
+                <mat-panel-description>
+                  Tutorial #{{ i + 1 }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+  
+              <p>{{ section.description }}</p>
+              <a routerLink="{{ '/tour/' +  section.sectionId }}">Go to tutorial</a>
+            </mat-expansion-panel>
+          </mat-accordion>
+  
+        </mat-card-content>
+      </mat-card>
+  
+  
+    </ng-container>
+  
+    <ng-container *ngIf="!allSectionsEnable">
+  
+      <mat-card class="mt-3 pb-4">
+        <mat-card-content>
+          <playground-template [sectionModel]="currentSection[0]"></playground-template>
+        </mat-card-content>
+      </mat-card>
+  
+    </ng-container>
+  
+  </div>
+  

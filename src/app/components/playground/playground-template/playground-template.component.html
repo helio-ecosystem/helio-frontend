@@ -10,7 +10,11 @@
       <h2 for="formControlTranslation" *ngIf="sectionModel == null">Translation Area</h2>
       <h2 for="formControlTranslation" *ngIf="sectionModel != null">Translation Template</h2>
 
-      <textarea class="form-control" id="formControlTranslation" placeholder="Type your awesome translation..." rows="10" [formControl]="translationControl"></textarea>
+      <textarea class="form-control" id="formControlTranslation"
+            placeholder="Type your awesome translation..."
+            rows="10"
+            [formControl]="translationControl">
+      </textarea>
 
       <!--
       <ngs-code-editor [theme]="'vs'" [codeModel]="codeModel" [options]="null" (valueChanged)="onCodeChanges($event)"></ngs-code-editor>

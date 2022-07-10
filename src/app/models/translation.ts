@@ -1,47 +1,46 @@
 export class TranslationModel {
-
-    private id: string;
-    private mappingProcessor: string;
-    private threads: number;
-    private body: string;
+    private _id: string;
+    private _mappingProcessor: string;
+    private _threads: number;
+    private _body: string;
 
     constructor({ id, mappingProcessor, threads, body }) {
-        this.id = id;
-        this.mappingProcessor = mappingProcessor;
-        this.threads = threads;
-        this.body = body;
+        this._id = id;
+        this._mappingProcessor = mappingProcessor;
+        this._threads = threads;
+        this._body = body;
     }
 
-    public getId(): string {
-      return this.id;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    public setId(id: string): void {
-      this.id = id;
-    }
+  set id(value: string) {
+    this._id = value;
+  }
 
-    public getMappingProcessor(): string {
-      return this.mappingProcessor;
-    }
+  get mappingProcessor(): string {
+    return this._mappingProcessor;
+  }
 
-    public setMappingProcessor(mappingProcessor: string): void {
-      this.mappingProcessor = mappingProcessor;
-    }
+  set mappingProcessor(value: string) {
+    this._mappingProcessor = value;
+  }
 
-    public getThreads(): number {
-      return this.threads;
-    }
+  get threads(): number {
+    return this._threads;
+  }
 
-    public setThreads(threads: number): void {
-      this.threads = threads;
-    }
+  set threads(value: number) {
+    this._threads = value;
+  }
 
-    public getBody(): string {
-      return this.body;
-    }
+  get body(): string {
+    return this._body;
+  }
 
-    public setBody(body: string): void {
-      this.body = body;
-    }
+  set body(value: string) {
+    this._body = value;
+  }
 
 }
