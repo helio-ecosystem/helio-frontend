@@ -17,9 +17,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {ReactiveFormsModule} from "@angular/forms";
-import {PlaygroundModule} from "../playground/playground.module";
-import {PlaygroundTemplateComponent} from "../playground/playground-template/playground-template.component";
 import {PlaygroundExportModule} from "../playground/playground-export.module";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 // This Module's Components
 const routes: Routes = [
@@ -40,7 +39,8 @@ const routes: Routes = [
     MatInputModule,
     MatStepperModule,
     ReactiveFormsModule,
-    PlaygroundExportModule
+    PlaygroundExportModule,
+    MatButtonToggleModule
   ],
   providers: [{
       provide: STEPPER_GLOBAL_OPTIONS,

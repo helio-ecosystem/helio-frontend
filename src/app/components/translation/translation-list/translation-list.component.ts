@@ -25,7 +25,7 @@ export class TranslationListComponent {
     private router: Router,
     private dialog: MatDialog)
   {
-    this.settings.setSection('Translation list');
+    this.settings.setSection('Translation');
     this.search();
   }
 

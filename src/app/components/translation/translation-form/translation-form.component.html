@@ -1,1 +1,56 @@
-<p>translation-form works!</p>
+<form [formGroup]="form" [style.fontSize.px]="fontSizeControl.value > 20 ? 20 : fontSizeControl.value < 10 ? 10 : fontSizeControl.value">
+    <div class="row">
+
+      <div class="col-12 mb-3">
+        <mat-button-toggle-group *ngIf="displayFormModes" class="me-5">
+          <mat-button-toggle disabled="true">
+            Select mode
+          </mat-button-toggle>
+          <mat-button-toggle (click)="changeEditionMode(false)" checked aria-label="Translation details">
+            <mat-icon>description</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle (click)="changeEditionMode(true)" aria-label="Edit translation">
+            <mat-icon>edit</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Font size</mat-label>
+          <input matInput type="number" placeholder="Ex. 16" [formControl]="fontSizeControl" min="10" max="20">
+          <span matSuffix>px</span>
+          <mat-error *ngIf="fontSizeControl.invalid">Size must be between 10px and 20px</mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="col-12 mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Translation name</mat-label>
+          <input matInput placeholder="Type the translation name" formControlName="name" required>
+        </mat-form-field>
+
+      </div>
+
+
+
+      <div class="col-12 mb-3">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Tranlation template</mat-label>
+          <textarea matNativeControl placeholder="Type your translation" rows="20" formControlName="translation" required></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 mb-3" *ngIf="error">
+        <p class="text-danger"><b>Error</b>: {{ error }}</p>
+      </div>
+
+
+      <div class="col-12 mt-2" *ngIf="editionMode">
+        <button mat-flat-button class="btn success-btn" (click)="saveTranslation()">Save translation</button>
+      </div>
+  
+
+    </div>
+
+</form>

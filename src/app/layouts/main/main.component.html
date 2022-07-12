@@ -31,7 +31,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-nav-list style="background-color: white" class="rounded">
-          <mat-list-item [ngClass]="{'child-item-selected': sectionTitle === 'Translation list', 'child-item-menu': sectionTitle != 'Translation list' }">
+          <mat-list-item [ngClass]="{'child-item-selected': sectionTitle === 'Translation', 'child-item-menu': sectionTitle != 'Translation' }">
             <a matLine routerLink="/translations" (click)="drawer.mode == 'over' ? drawer.close() : ''">List</a>
           </mat-list-item>
         </mat-nav-list>
@@ -43,7 +43,7 @@
       </mat-list-item>
 
       <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Tour', 'item-menu': sectionTitle != 'Tour' }">
-        <mat-icon matListIcon>science</mat-icon>
+        <mat-icon matListIcon>tour</mat-icon>
         <a style="margin-left: 10px" routerLink="/tour" (click)="drawer.mode == 'over' ? drawer.close() : ''">Tour</a>
       </mat-list-item>
 

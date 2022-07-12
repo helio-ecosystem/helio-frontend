@@ -12,7 +12,7 @@
 
       <textarea class="form-control" id="formControlTranslation"
             placeholder="Type your awesome translation..."
-            rows="10"
+            rows="15"
             [formControl]="translationControl">
       </textarea>
 
@@ -29,7 +29,7 @@
   <div class="col-6 mt-4">
     <div class="form-group">
       <h2>Results obtained</h2>
-      <textarea class="form-control mb-1" disabled rows="10" [(ngModel)]="translationResults"></textarea>
+      <textarea class="form-control mb-1" disabled rows="15" [(ngModel)]="translationResults"></textarea>
       <mat-progress-bar *ngIf="loadingTranslation" mode="indeterminate"></mat-progress-bar>
       <mat-progress-bar *ngIf="translationResultsSuccess != null" mode="determinate" value="100"
                         [ngClass]="{ 'success-progress': translationResultsSuccess, 'error-progress': !translationResultsSuccess }"></mat-progress-bar>

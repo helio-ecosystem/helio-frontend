@@ -10,7 +10,7 @@ import {TourService} from "../../../services/tour.service";
   templateUrl: './playground-template.component.html',
   styleUrls: ['./playground-template.component.css']
 })
-export class PlaygroundTemplateComponent implements OnInit, OnChanges {
+export class PlaygroundTemplateComponent implements OnChanges {
 
   @Input() disabledArea: boolean;
   @Input() translation: string;
@@ -24,10 +24,8 @@ export class PlaygroundTemplateComponent implements OnInit, OnChanges {
   private model: TranslationModel =
     new TranslationModel({ id: TourService.playground_translation_id, mappingProcessor: '', threads: 1, body: '' });
 
-  constructor(private service : TranslationService) {}
-
-  ngOnInit(): void {
-    this.translationControl = new FormControl({ value: '', disabled: this.disabledArea != null && this.disabledArea });
+  constructor(private service : TranslationService) {
+    this.translationControl = new FormControl({ value: '', disabled: false });
   }
 
 
@@ -67,14 +65,17 @@ export class PlaygroundTemplateComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.translationControl && (changes['translation'] || changes['sectionModel'])) {
+    if (changes) {
       if (changes['translation']) {
         this.translationControl.setValue(changes['translation'].currentValue);
       }
       if (changes['sectionModel']) {
         this.translationControl.setValue(changes['sectionModel'].currentValue._translation);
       }
+      if (changes['disabledArea']) {
+        var val = this.translationControl.value;
+        this.translationControl = new FormControl({ value: val, disabled: this.disabledArea != null && this.disabledArea });
+      }
     }
   }
-
 }
