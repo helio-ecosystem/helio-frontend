@@ -22,6 +22,7 @@ import {StepperSelectionEvent} from "@angular/cdk/stepper/stepper";
 export class TranslationFormDialogComponent {
 
   firstFormStep: FormGroup;
+  fontSizeControl;
   errorLastStep: string;
 
   private model: TranslationModel =
@@ -32,6 +33,7 @@ export class TranslationFormDialogComponent {
     private service: TranslationService,
     private fb: FormBuilder)
   {
+    this.fontSizeControl = new FormControl(15);
     this.firstFormStep = fb.group({
       'name': ['', Validators.required],
       'translation': ['', Validators.required]

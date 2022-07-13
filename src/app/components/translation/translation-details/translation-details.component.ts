@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TranslationService} from "../../../services/translation.service";
 import {TranslationModel} from "../../../models/translation";
-import { TourSectionModel } from 'src/app/models/tour-section';
 import { TourService } from 'src/app/services/tour.service';
 import { SettingsService } from 'src/app/services/settings.service';
 
