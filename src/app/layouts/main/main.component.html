@@ -56,14 +56,14 @@
   <mat-sidenav-content>
 
     <mat-toolbar style="background-color: #209CEE; color: white" *ngIf="drawer.mode == 'over'">
-      <button
+      <a
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+      </a>
       <span>{{ sectionTitle }}</span>
       <span class="example-spacer"></span>
 

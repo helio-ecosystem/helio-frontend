@@ -11,7 +11,7 @@ export class InterceptorPlaygroundService implements HttpInterceptor  {
 
   constructor(private router: Router) { }
 
-  private sectionsAvailable = ['home', 'playground', 'tour'];
+  private sectionsAvailable = ['home', 'playground', 'tour', 'api'];
 
   public intercept(request: HttpRequest<any>, next: HttpHandler) {
     var currentSection = request.url.match('[^\/]+:\/\/[^\/]+\/([^\/]+).*')[1];
