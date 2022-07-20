@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 import { environment } from "../../../environments/environment";
 
 @Component({
@@ -8,6 +9,6 @@ import { environment } from "../../../environments/environment";
 })
 export class FooterComponent {
 
-  env = environment;
+  version = SettingsService.APP_VERSION;
 
 }

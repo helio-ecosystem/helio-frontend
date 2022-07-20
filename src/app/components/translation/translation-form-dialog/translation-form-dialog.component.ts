@@ -57,7 +57,12 @@ export class TranslationFormDialogComponent {
         next: (v) => this.errorLastStep = 'Error: Translation name has already exists.',
         error: (e) => {
           this.service.add(this.model).subscribe({
-            next: (v) => this.dialog.close(v),
+            next: (v) => {
+              var dataValue = JSON.parse(v);
+              this.model.mappingProcessor = dataValue.mappingProcessor;
+              this.model.threads = dataValue.threads;
+              this.dialog.close(this.model);
+            },
             error: (e) => this.errorLastStep = 'Error: ' + e
           });
         }

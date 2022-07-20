@@ -1,9 +1,9 @@
 [
   {
-    "name": "Hello world!",
-    "description": "This is an description for Hello world",
+    "name": "Helio world!",
+    "description": "This is an description for Helio world",
     "translation_template": "helloooooo",
-    "expected_results": "Hello world!"
+    "expected_results": "Helio world!"
   },
   {
     "name": "Retrieve data",

@@ -39,8 +39,8 @@ export class TranslationService extends RestService {
     return super.post('/api/' + data.id, data.body, this.textHeaders);
   }
 
-  remove(data: TranslationModel): void {
-    super.delete('/api/' + data.id);
+  remove(id: string): Observable<any> {
+    return super.delete('/api/' + id);
   }
 
   mappingDetails(id: string): Observable<any> {

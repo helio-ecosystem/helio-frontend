@@ -6,6 +6,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SettingsService {
 
+  public static APP_VERSION = 'v0.0.3';
+
   private subjectOnChangeSection: Subject<string> = new Subject<string>();
 
   onChangeSection(): Observable<string> {

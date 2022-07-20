@@ -42,7 +42,7 @@
 
 
           <div>
-            <a mat-flat-button matStepperNext class="btn info-btn">Next</a>
+            <button mat-flat-button matStepperNext class="btn info-btn">Next</button>
           </div>
         </form>
       </mat-step>
@@ -56,8 +56,8 @@
 
 
         <div>
-          <a mat-stroked-button matStepperPrevious>Back</a>
-          <a mat-flat-button matStepperNext class="btn info-btn btn-space-left">Next</a>
+          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-flat-button matStepperNext class="btn info-btn btn-space-left">Next</button>
         </div>
       </mat-step>
 
@@ -69,7 +69,7 @@
           </div>
 
           <div class="col-12 mb-5" style="text-align: center">
-            <a mat-stroked-button matStepperPrevious>Back</a>
+            <button mat-stroked-button matStepperPrevious>Back</button>
             <a mat-flat-button class="success-btn btn-space-left" [disabled]="!firstFormStep.valid" (click)="saveTranslation()">Save translation</a>
           </div>
         </div>

@@ -1,0 +1,45 @@
+
+<mat-form-field appearance="outline">
+    <mat-label>Filter translations</mat-label>
+    <input matInput placeholder="Type the translation {{ columns[0] | titlecase }}" [formControl]="filterControl" >
+</mat-form-field>
+
+<table class="table table-hover" aria-label="Elements">
+    <thead>
+        <tr>
+            <th mat-header-row colspan="2" *ngFor="let column of columns; let i = index">{{ column | titlecase }}</th>
+            <th mat-header-row *ngIf="actions">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <ng-container *ngIf="table.rows">
+
+        <tr *ngFor="let row of table.rows; let i = index">
+            <td colspan="2" *ngFor="let column of columns; let j = index" style="vertical-align: middle;">{{ row[j] }}</td>
+            <td *ngIf="actions" class="fit">
+                <ng-container *ngFor="let action of actions; let j = index">
+                    <a mat-stroked-button class="{{ j > 0 ? action.clazz + ' btn-space-left' : action.clazz }}" (click)="onActionClicked(row, action.event)">
+                        <mat-icon matListIcon matLine>{{ action.icon }}</mat-icon>
+                    </a>
+                </ng-container>
+            </td>
+        </tr>
+
+    </ng-container>
+
+    <tr *ngIf="!table.rows">
+        <td>No data found</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<mat-paginator #paginator
+    [length]="dataFiltered?.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    aria-label="Select page"
+    (page)="onPageChange($event)"></mat-paginator>

@@ -16,11 +16,15 @@ import {CommonModule} from "@angular/common";
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { TableComponent } from './table/table.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { TableSimpleComponent } from './table-simple/table-simple.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from "@angular/material/input";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     MatMenuModule,
@@ -33,17 +37,19 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
     declarations: [
         FooterComponent,
         MainComponent,
-        TableComponent,
+        TableSimpleComponent
     ],
   exports: [
     FooterComponent,
     MainComponent,
-    TableComponent
+    TableSimpleComponent
   ]
 })
 export class LayoutsModule {}

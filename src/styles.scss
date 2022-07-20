@@ -31,6 +31,15 @@ body {
   color: white;
 }
 
+.danger-btn {
+  background-color: #ee3f20;
+  color: white;
+}
+.danger-btn:hover {
+  background-color: #bd2b12;
+  color: white;
+}
+
 .btn-space-left {
   margin-left: 10px !important;
 }

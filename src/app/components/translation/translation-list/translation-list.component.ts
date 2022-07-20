@@ -6,6 +6,9 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {TranslationFormDialogComponent} from "../translation-form-dialog/translation-form-dialog.component";
 import { TourService } from 'src/app/services/tour.service';
+import { RowActionModel } from 'src/app/models/row-action';
+import { RowResponseModel } from 'src/app/models/row-action response';
+import { TranslationDeteleDialogComponent } from '../translation-detele-dialog/translation-detele-dialog.component';
 
 @Component({
   selector: 'app-translation-list',
@@ -14,7 +17,19 @@ import { TourService } from 'src/app/services/tour.service';
 })
 export class TranslationListComponent {
 
-  columns = ['id', 'processor', 'threads assigned'];
+  columns = ['# id', 'processor', 'threads assigned'];
+  rowActions = [
+    new RowActionModel({
+      clazz: 'info-btn',
+      event: 'edit',
+      icon: 'edit'
+    }),
+    new RowActionModel({
+      clazz: 'danger-btn',
+      event: 'delete',
+      icon: 'delete'
+    })
+  ];
   data;
   error: string = '';
   notification = null;
@@ -38,21 +53,16 @@ export class TranslationListComponent {
   }
 
 
-  create() {
-    const dialogRef = this.dialog.open(TranslationFormDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        var dataValue = JSON.parse(result);
-        this.addRowInTable(dataValue);
-        this.addTemporalNotification('Translation "' + dataValue.id + '" added correctly.');
-      }
-    });
-  }
-
   private addTemporalNotification(msg) {
-    this.notification = msg;
+    this.notification = { type: 'success', data: msg };
     setTimeout(() => this.notification = null, 10000);
   }
+  
+  private addTemporalErrorNotification(msg) {
+    this.notification = { type: 'error', data: msg };
+    setTimeout(() => this.notification = null, 10000);
+  }
+  
 
 
   private toTableData(sourceData: any[]) {
@@ -66,15 +76,57 @@ export class TranslationListComponent {
       this.data.push([d.id, d.mappingProcessor, d.threads]);
     }
     else if (newData.id && newData.id != TourService.playground_translation_id) {
-      console.log(newData);
       this.data.push([newData.id, newData.mappingProcessor, newData.threads]);
     }
   }
 
-  rowSelected(row: any[]): void {
-    var selected = row[0];
-    console.log("Row clicked! " + selected);
-    this.router.navigate(['/translations/details/' + selected]);
+  private removeRowInTable(rowId) {
+    this.data = this.data.filter(row => row[0] != rowId);
+  }
+
+
+
+  rowActionSelected(action: RowResponseModel): void {
+    if (action.event == 'edit') {
+      this.router.navigate(['/translations/details/' + action.row[0]]);
+    }
+    else if (action.event == 'delete') {
+      this.deleteDialog(action.row[0]);
+    }
+  }
+
+  
+  create() {
+    const dialogRef = this.dialog.open(TranslationFormDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addRowInTable(result);
+        this.addTemporalNotification('Translation "' + result.id + '" added correctly.');
+      }
+    });
+  }
+
+
+  private deleteDialog(translationId) {
+    const dialogRef = this.dialog.open(TranslationDeteleDialogComponent, {
+      data: {
+        translationId: translationId
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      /*
+      if (result && result.status == 'ok') {
+        this.removeRowInTable(result.data);
+        this.addTemporalNotification('Translation "' + result.data + '" deleted correctly.');
+      }
+      else if (result && result.status == 'error') {
+        this.addTemporalErrorNotification('Translation "' + result.data + '" deleted correctly.');
+      }
+      */
+     if (result) {
+      this.addTemporalErrorNotification('Translation "' + result.data + '" deleted correctly.');
+     }
+    });
   }
 
 }

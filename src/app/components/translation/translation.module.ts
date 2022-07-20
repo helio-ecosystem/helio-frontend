@@ -19,6 +19,7 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PlaygroundExportModule} from "../playground/playground-export.module";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { TranslationDeteleDialogComponent } from './translation-detele-dialog/translation-detele-dialog.component';
 
 // This Module's Components
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
       TranslationDetailsComponent,
       TranslationTemplateComponent,
       TranslationFormDialogComponent,
+      TranslationDeteleDialogComponent
     ],
     exports: [
         RouterModule,

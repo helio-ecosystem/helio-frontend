@@ -6,7 +6,6 @@ import {InterceptorDisabledService} from "../app/services/interceptor/intercepto
 
 export const environment = {
   production: false,
-  version: '0.0.2',
   host: 'http://localhost:4567',
   interceptor: InterceptorDisabledService
 };

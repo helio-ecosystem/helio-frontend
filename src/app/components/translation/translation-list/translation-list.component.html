@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pb-5">
 
 
 <div class="row pt-3 pb-3 mb-3 border-bottom" style="background-color: white">
@@ -16,20 +16,33 @@
 </div>
 
 <div class="row mb-4 m-1" *ngIf="notification">
-  <div class="col-12 alert-success text-success rounded p-2">
+  <div class="col-12 alert-success text-success rounded p-2" *ngIf="notification.type == 'success'">
     <h2>Success!</h2>
-    <pre class="text-wrap">{{ notification }}</pre>
+    <pre class="text-wrap">{{ notification.data }}</pre>
+  </div>
+  <div class="col-12 alert-danger text-danger rounded p-2" *ngIf="notification.type == 'error'">
+    <h2>Error!</h2>
+    <pre class="text-wrap">{{ notification.data }}</pre>
   </div>
 </div>
 
-
   <div class="row" *ngIf="!error && data">
     <div class="col-12">
-        <app-table [columns]="columns" [data]="data" (rowClick)="rowSelected($event)" *ngIf="data"></app-table>
+      
+      <mat-card class="mt-3 pb-4">
+        <mat-card-content>
+
+          <table-simple [columns]="columns" [data]="data" [actions]="rowActions"
+            (rowActionClick)="rowActionSelected($event)"></table-simple>
+
+        </mat-card-content>
+      </mat-card>
+
     </div>
   </div>
 
 
+  
   <div class="row" *ngIf="error">
     <div class="col-12">
       <pre class="text-wrap rounded alert-danger p-2">{{ error }}</pre>
