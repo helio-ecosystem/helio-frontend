@@ -41,10 +41,8 @@ export class MarketplaceListComponent {
   }
 
   create() {
-    const dialogRef = this.dialog.open(MarketplaceFormDialogComponent, {
-      width: '300px'
-    });
-    //dialogRef.afterClosed().subscribe(() => console.log('Dialogo cerrado'));
+    const dialogRef = this.dialog.open(MarketplaceFormDialogComponent);
+    dialogRef.afterClosed().subscribe(() => console.log('Dialogo cerrado'));
   }
 
 

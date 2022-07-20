@@ -9,8 +9,16 @@ import {TranslationModel} from "../models/translation";
 })
 export class ComponentService extends RestService {
 
-  list(): Observable<any[]> {
+  list(): Observable<ComponentModel[]> {
     return super.get('/component');
+  }
+
+  addComponent(component: ComponentModel): Observable<ComponentModel> {
+    return super.post('/component', component);
+  }
+
+  deleteComponent(componentId: string): Observable<any> {
+    return super.delete('/component/' + componentId);
   }
 
 }

@@ -10,6 +10,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatLineModule} from "@angular/material/core";
 import {MatDialogModule} from '@angular/material/dialog';
 import { MarketplaceFormDialogComponent } from './marketplace-form-dialog/marketplace-form-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 // This Module's Components
 const routes: Routes = [
@@ -25,7 +28,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatButtonModule,
     MatIconModule,
-    MatLineModule
+    MatLineModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
     declarations: [
       MarketplaceListComponent,

@@ -1,1 +1,62 @@
-Coming soon...!
+<div class="row">
+    <div class="col-12">
+      <h2>New component</h2>
+    </div>
+  
+    <div class="col-12">
+
+        <form [formGroup]="componentFormGroup" class="mt-4" [style.fontSize.px]="fontSizeControl.value > 20 ? 20 : fontSizeControl.value < 10 ? 10 : fontSizeControl.value">
+
+            <div class="row">
+  
+              <div class="col-12 mb-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Font size</mat-label>
+                  <input matInput type="number" placeholder="Ex. 16" [formControl]="fontSizeControl" min="10" max="20">
+                  <span matSuffix>px</span>
+                  <mat-error *ngIf="fontSizeControl.invalid">Size must be between 10px and 20px</mat-error>
+                </mat-form-field>
+              </div>
+  
+   
+              <div class="col-12 mb-4">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Source</mat-label>
+                  <input matInput placeholder="Type the source" formControlName="source" required>
+                </mat-form-field>
+                <p class=""><a href="https://github.com/helio-ecosystem" target="_blank">Check all components availables</a></p>
+              </div>
+  
+              
+              <div class="col-6 mb-3">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Class</mat-label>
+                  <input matInput placeholder="Type the source class" formControlName="class" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-6 mb-3">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Type</mat-label>
+                  <input matInput placeholder="Type the source class" formControlName="type" required>
+                </mat-form-field>
+              </div>
+  
+
+  
+              <div class="col-12 mt-5" style="text-align: center;">
+                <a mat-flat-button (click)="cancel()">Cancel</a>
+                <a mat-flat-button class="success-btn btn-space-left" (click)="create()">Save component</a>
+              </div>
+              
+
+            </div>
+  
+  
+          </form>
+
+
+
+
+    </div>
+</div>
