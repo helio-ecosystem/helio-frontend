@@ -13,6 +13,7 @@ import { MarketplaceFormDialogComponent } from './marketplace-form-dialog/market
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 // This Module's Components
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
     MatLineModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     ReactiveFormsModule
   ],
     declarations: [

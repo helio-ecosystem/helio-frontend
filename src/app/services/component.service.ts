@@ -14,7 +14,9 @@ export class ComponentService extends RestService {
   }
 
   addComponent(component: ComponentModel): Observable<ComponentModel> {
-    return super.post('/component', component);
+    console.log(component);
+    console.log(component.toJson());
+    return super.post('/component', component.toJson());
   }
 
   deleteComponent(componentId: string): Observable<any> {

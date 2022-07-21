@@ -14,50 +14,62 @@
     </div>
   </div>
 
+  
+<div class="row mb-4 m-1" *ngIf="notification">
+  <div class="col-12 alert-success text-success rounded p-2" *ngIf="notification.type == 'success'">
+    <h2>Success!</h2>
+    <pre class="text-wrap">{{ notification.data }}</pre>
+  </div>
+  <div class="col-12 alert-danger text-danger rounded p-2" *ngIf="notification.type == 'error'">
+    <h2>Error!</h2>
+    <pre class="text-wrap">{{ notification.data }}</pre>
+  </div>
+</div>
 
-  <div class="row">
 
-    <div class="col-4 mb-3" *ngFor="let component of componentsInstalled" (mouseover)="hover = component.clazz" (mouseleave)="hover = ''">
 
-      <mat-card [ngClass]="{'mat-elevation-z8': hover == component.clazz}">
-        <mat-card-title>
-          <span class="mat-title">{{ component.name | titlecase }}</span>
-        </mat-card-title>
+<div class="row" *ngIf="error">
+  <div class="col-12">
 
-        <mat-card-content class="mt-3">
+    <h2 class="mat-title text-danger">Error</h2>
 
-          <div class="row">
-            <div class="col-8 col-xs-12 mb-3 text-wrap">
-              <span class="mat-card-subtitle">Class</span>
-              <span>{{ component.clazz }}</span>
-            </div>
-            <div class="col-4 col-xs-12 mb-3 text-wrap">
-              <span class="mat-card-subtitle">Type</span>
-              <span>{{ component.type }}</span>
-            </div>
-            <div class="col-12">
-              <span class="mat-card-subtitle">Source</span>
-              <a matLine>{{ component.source }}</a>
-            </div>
+    <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-4 mb-4" *ngFor="let component of componentsInstalled" (mouseover)="hover = component.clazz" (mouseleave)="hover = ''">
+
+    <mat-card [ngClass]="{'mat-elevation-z8': hover == component.clazz}">
+      <mat-card-title class="header-card {{ 'component-' + component.type | lowercase }}">
+        <mat-icon style="vertical-align: middle;">{{ iconTypes[component.type] }}</mat-icon>
+        <span style="vertical-align: bottom;" class="btn-space-left">{{ component.type }}</span>
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <h2>{{ component.name | titlecase }}</h2>
+
+        <div class="row">
+          <div class="col-8 col-xs-12 mb-3 text-wrap">
+            <span class="mat-card-subtitle">Class</span>
+            <span>{{ component.clazz }}</span>
           </div>
+          
+          <div class="col-12">
+            <span class="mat-card-subtitle">Source</span>
+            <a matLine>{{ component.source }}</a>
+          </div>
+        </div>
 
-        </mat-card-content>
+      </mat-card-content>
 
-        <mat-card-footer></mat-card-footer>
-      </mat-card>
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
 
-    </div>
+  </div>
 
 
-
-    <div class="row" *ngIf="error">
-      <div class="col-12">
-
-        <h2 class="mat-title text-danger">Error</h2>
-
-        <pre class="text-wrap alert-danger rounded p-2">{{ error }}</pre>
-      </div>
-    </div>
 
 
   </div>

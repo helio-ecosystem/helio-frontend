@@ -9,8 +9,6 @@ services:
         volume: {}
     ports:
       - "4567:4567"
-    networks:
-      - helio
 
   frontend:
     image: emiliocrespoperan/helio-frontend:latest
@@ -18,8 +16,6 @@ services:
       - helio-rest
     ports:
       - "4201:80"
-    networks:
-      - helio
 
   playground:
     image: emiliocrespoperan/helio-frontend-playground:latest
@@ -27,13 +23,7 @@ services:
       - helio-rest
     ports:
       - "4202:80"
-    networks:
-      - helio
-      
-
-networks:
-  helio:
-  
+        
 volumes:
   helio-db:
     name: helio-db

@@ -11,11 +11,13 @@ export class ComponentModel {
         this._type = type;
         // Extract repository name by regex
         //this._name = source.match('^.*\\/helio-ecosystem\\/([^\\/]*).*$')[1];
-        this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
+        try {
+          this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
+        }
+        catch(e) {
+          this._name = this._clazz;
+        }
     }
-
-
-
 
   get name(): string {
     return this._name;
@@ -49,37 +51,8 @@ export class ComponentModel {
     this._type = value;
   }
 
-  /*
-    public getName(): string {
-        return this.name;
-    }
+  toJson() {
+    return { source: this.source, clazz: this.clazz, type: this.type };
+  }
 
-    public setName(name: string): void {
-        this.name = name;
-    }
-
-    public getSource(): string {
-        return this.source;
-    }
-
-    public setSource(source: string): void {
-        this.source = source;
-    }
-
-    public getClazz(): string {
-        return this.clazz;
-    }
-
-    public setClazz(clazz: string): void {
-        this.clazz = clazz;
-    }
-
-    public getType(): string {
-        return this.type;
-    }
-
-    public setType(type: string): void {
-        this.type = type;
-    }
-*/
 }

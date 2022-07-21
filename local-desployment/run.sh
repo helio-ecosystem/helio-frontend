@@ -1,0 +1,1 @@
+docker compose -p "helio-ecosystem" up -d

@@ -23,40 +23,43 @@
                 <mat-form-field appearance="outline" style="width: 100%">
                   <mat-label>Source</mat-label>
                   <input matInput placeholder="Type the source" formControlName="source" required>
+                  <mat-hint>Type the url from <a href="https://github.com/helio-ecosystem" target="_blank">Helio-Ecosystem components repository</a> available.</mat-hint>
                 </mat-form-field>
-                <p class=""><a href="https://github.com/helio-ecosystem" target="_blank">Check all components availables</a></p>
               </div>
   
               
               <div class="col-6 mb-3">
                 <mat-form-field appearance="outline" style="width: 100%">
                   <mat-label>Class</mat-label>
-                  <input matInput placeholder="Type the source class" formControlName="class" required>
+                  <input matInput placeholder="Type the source class" formControlName="clazz" required>
+                  <mat-hint>Type the class for the component</mat-hint>
                 </mat-form-field>
               </div>
 
               <div class="col-6 mb-3">
                 <mat-form-field appearance="outline" style="width: 100%">
                   <mat-label>Type</mat-label>
-                  <input matInput placeholder="Type the source class" formControlName="type" required>
+                  <mat-select formControlName="type" required>
+                    <mat-option *ngFor="let type of componentTypes" value="{{ type }}">{{ type | titlecase }}</mat-option>
+                  </mat-select>
+                  <mat-hint>Select the component type</mat-hint>
                 </mat-form-field>
               </div>
   
 
+              <div class="col-12 mt-3" *ngIf="errorForm">
+                <pre class="text-wrap alert-danger rounded p-2">{{ errorForm }}</pre>
+              </div>
+
   
               <div class="col-12 mt-5" style="text-align: center;">
-                <a mat-flat-button (click)="cancel()">Cancel</a>
-                <a mat-flat-button class="success-btn btn-space-left" (click)="create()">Save component</a>
+                <a mat-stroked-button (click)="cancel()">Cancel</a>
+                <a mat-stroked-button class="success-btn btn-space-left" [disabled]="disableButton" (click)="create()">Save component</a>
               </div>
-              
 
             </div>
   
-  
           </form>
-
-
-
 
     </div>
 </div>
