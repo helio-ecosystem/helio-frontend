@@ -39,7 +39,7 @@ export class MarketplaceFormDialogComponent {
       this.service.addComponent(component).subscribe({
         next: (v) => this.dialog.close(component),
         error: (e) => {
-          this.errorForm = JSON.stringify(e);
+          this.errorForm = JSON.parse(JSON.stringify(e))['error']['message'];
           this.disableButton = false;
         }
       });

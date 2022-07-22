@@ -1,21 +1,20 @@
 .component-builder {
-    background-color: #e91e63;
+    background-color: #00897b;
     color: white;
 }
 
 .component-handler {
-    background-color:  #1565c0;
-    color: white;
-}
-
-.component-provider {
     background-color:  #ffca28;
     color: black;
 }
 
+.component-provider {
+    background-color:  #209CEE;
+    color: white;
+}
 
 .component-action {
-    background-color:  #7b1fa2;
+    background-color:  #e91e63;
     color: white;
 }
 
@@ -25,7 +24,7 @@
 }
 
 .component-unit {
-    background-color:  #e91e63;
+    background-color:  #7b1fa2;
     color: white;
 }
 

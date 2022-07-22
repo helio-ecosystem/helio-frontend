@@ -12,7 +12,8 @@ export class ComponentModel {
         // Extract repository name by regex
         //this._name = source.match('^.*\\/helio-ecosystem\\/([^\\/]*).*$')[1];
         try {
-          this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
+          //this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
+          this._name = this._clazz.split('.').reverse()[0];
         }
         catch(e) {
           this._name = this._clazz;

@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MarketplaceDeleteDialogComponent } from './marketplace-delete-dialog/marketplace-delete-dialog.component';
 
 // This Module's Components
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
     declarations: [
       MarketplaceListComponent,
       MarketplaceFormDialogComponent,
+      MarketplaceDeleteDialogComponent
     ],
     exports: [
         RouterModule,

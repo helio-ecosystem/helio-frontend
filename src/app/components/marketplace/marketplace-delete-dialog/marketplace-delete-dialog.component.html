@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-12">
+      <h2>Delete component {{ component.name }}?</h2>
+      <p>This action cannot be undone.</p>
+    </div>
+    <div class="col-12 mt-3" style="text-align: center;">
+        <a mat-stroked-button (click)="cancel()">Cancel</a>
+        <a mat-stroked-button class="danger-btn btn-space-left" (click)="deleteComponent()">Delete</a>
+    </div>
+</div>

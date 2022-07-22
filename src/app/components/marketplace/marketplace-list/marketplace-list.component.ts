@@ -5,6 +5,7 @@ import {ComponentService} from "../../../services/component.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketplaceFormDialogComponent} from "../marketplace-form-dialog/marketplace-form-dialog.component";
 import { types, iconTypes } from '../component-types';
+import { MarketplaceDeleteDialogComponent } from '../marketplace-delete-dialog/marketplace-delete-dialog.component';
 
 @Component({
   templateUrl: './marketplace-list.component.html',
@@ -56,8 +57,28 @@ export class MarketplaceListComponent {
     });
   }
 
+
+  deleteComponent(component: ComponentModel) {
+    const dialogRef = this.dialog.open(MarketplaceDeleteDialogComponent, { data: component });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.status == 'ok') {
+        this.componentsInstalled = this.componentsInstalled.filter(p => p.name != component.name && p.clazz != component.clazz && p.source != component.source);
+        this.addTemporalNotification('Component ' + component.name + ' deleted successfuly!');
+      }
+      else if (result && result.status == 'error') {
+        this.addTemporalErrorNotification('Error when deleted component ' + component.name + '');
+      }
+    });
+  }
+
+
   private addTemporalNotification(msg) {
     this.notification = { type: 'success', data: msg };
+    setTimeout(() => this.notification = null, 10000);
+  }
+
+  private addTemporalErrorNotification(msg) {
+    this.notification = { type: 'error', data: msg };
     setTimeout(() => this.notification = null, 10000);
   }
 

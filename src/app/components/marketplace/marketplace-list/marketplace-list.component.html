@@ -48,7 +48,15 @@
 
       <mat-card-content>
 
-        <h2>{{ component.name | titlecase }}</h2>
+        <div class="row">
+          <div class="col-10">
+            <h2>{{ component.name }}</h2>
+          </div>
+          <div class="col-2" style="text-align: center">
+            <a mat-button (click)="deleteComponent(component)" style="margin-right: 10px;"><mat-icon>delete</mat-icon></a>
+          </div>
+        </div>
+
 
         <div class="row">
           <div class="col-8 col-xs-12 mb-3 text-wrap">
