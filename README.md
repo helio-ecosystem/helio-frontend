@@ -16,25 +16,17 @@ services:
         volume: {}
     ports:
       - "4567:4567"
-    networks:
-      - helio
 
   frontend:
     image: emiliocrespoperan/helio-frontend:latest
     depends_on:
       - helio-rest
     ports:
-      - "4200:80"
-    networks:
-      - helio
+      - "4201:80"
 
-networks:
-  helio:
-  
 volumes:
   helio-db:
     name: helio-db
-
 ```
 
 Otherwise, if you want a minimal application to learn about [Helio-Ecosystem](https://github.com/helio-ecosystem), use this docker compose instead:
@@ -51,21 +43,14 @@ services:
         volume: {}
     ports:
       - "4567:4567"
-    networks:
-      - helio
 
   playground:
     image: emiliocrespoperan/helio-frontend-playground:latest
     depends_on:
       - helio-rest
     ports:
-      - "4201:80"
-    networks:
-      - helio
-      
-networks:
-  helio:
-  
+      - "4202:80"
+        
 volumes:
   helio-db:
     name: helio-db
