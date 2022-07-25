@@ -57,7 +57,7 @@ export class MarketplaceListComponent {
     });
   }
 
-
+/*
   deleteComponent(component: ComponentModel) {
     const dialogRef = this.dialog.open(MarketplaceDeleteDialogComponent, { data: component });
     dialogRef.afterClosed().subscribe(result => {
@@ -70,7 +70,7 @@ export class MarketplaceListComponent {
       }
     });
   }
-
+*/
 
   private addTemporalNotification(msg) {
     this.notification = { type: 'success', data: msg };
