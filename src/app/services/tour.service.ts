@@ -9,7 +9,7 @@ export class TourService {
 
   private tourSections: TourSectionModel[] = [];
 
-  public static playground_translation_id = 'playground';
+  public static playground_mapping_id = 'playground';
 
   constructor() {
     allSectionsInJsonFile.forEach((value, index: number) => this.tourSections.push(new TourSectionModel({

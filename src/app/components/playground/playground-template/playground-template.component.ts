@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { FormBuilder, FormControl } from "@angular/forms";
-import { TranslationService } from "../../../services/translation.service";
-import { TranslationModel } from "../../../models/translation";
-import {TourSectionModel} from "../../../models/tour-section";
-import {TourService} from "../../../services/tour.service";
+import { Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { FormControl } from "@angular/forms";
+import { MappingService } from "../../../services/mapping.service";
+import { MappingModel } from "../../../models/mapping";
+import { TourSectionModel } from "../../../models/tour-section";
+import { TourService } from "../../../services/tour.service";
 
 @Component({
   selector: 'playground-template',
@@ -13,52 +13,51 @@ import {TourService} from "../../../services/tour.service";
 export class PlaygroundTemplateComponent implements OnChanges {
 
   @Input() disabledArea: boolean;
-  @Input() translation: string;
+  @Input() mapping: string;
   @Input() sectionModel: TourSectionModel;
 
-  translationControl: FormControl;
-  translationResults: string;
-  translationResultsSuccess: boolean;
-  loadingTranslation: boolean;
+  mappingControl: FormControl;
+  mappingResults: string;
+  mappingResultsSuccess: boolean;
+  loadingMapping: boolean;
 
-  private model: TranslationModel =
-    new TranslationModel({ id: TourService.playground_translation_id, mappingProcessor: '', threads: 1, body: '' });
+  private model: MappingModel =
+    new MappingModel({ id: TourService.playground_mapping_id, mappingProcessor: '', threads: 1, body: '' });
 
-  constructor(private service : TranslationService) {
-    this.translationControl = new FormControl({ value: '', disabled: false });
+  constructor(private service : MappingService) {
+    this.mappingControl = new FormControl({ value: '', disabled: false });
   }
 
-
-  evaluateTranslation() {
-    this.model.body = this.translationControl.value;
-    this.loadingTranslation = true;
-    this.translationResults = null;
-    this.translationResultsSuccess = null;
+  evaluateMapping() {
+    this.model.body = this.mappingControl.value;
+    this.loadingMapping = true;
+    this.mappingResults = null;
+    this.mappingResultsSuccess = null;
     this.service.add(this.model).subscribe({
       next: (v) => {
-        this.translationResults = '';
+        this.mappingResults = '';
         this.service.dataValue(this.model.id).subscribe({
           next: (r) => {
-            this.translationResults = r.trim();
-            this.translationResultsSuccess = true;
-            this.loadingTranslation = false;
+            this.mappingResults = r.trim();
+            this.mappingResultsSuccess = true;
+            this.loadingMapping = false;
           },
           error: (errorObtainedResults) => {
-            this.translationResults = JSON.stringify(errorObtainedResults)
-            this.translationResultsSuccess = false;
-            this.loadingTranslation = false;
+            this.mappingResults = JSON.stringify(errorObtainedResults)
+            this.mappingResultsSuccess = false;
+            this.loadingMapping = false;
           }
         });
       },
-      error: (errorInAddTranslation) => {
-        if (JSON.parse(JSON.stringify(errorInAddTranslation))['error']['message']) {
-          this.translationResults = JSON.parse(JSON.stringify(errorInAddTranslation))['error']['message'];
+      error: (errorInAddMapping) => {
+        if (JSON.parse(JSON.stringify(errorInAddMapping))['error']['message']) {
+          this.mappingResults = JSON.parse(JSON.stringify(errorInAddMapping))['error']['message'];
         }
         else {
-          this.translationResults = JSON.parse(JSON.stringify(errorInAddTranslation))['message'];
+          this.mappingResults = JSON.parse(JSON.stringify(errorInAddMapping))['message'];
         }
-        this.translationResultsSuccess = false;
-        this.loadingTranslation = false;
+        this.mappingResultsSuccess = false;
+        this.loadingMapping = false;
       }
     });
 
@@ -66,15 +65,15 @@ export class PlaygroundTemplateComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes) {
-      if (changes['translation']) {
-        this.translationControl.setValue(changes['translation'].currentValue);
+      if (changes['mapping']) {
+        this.mappingControl.setValue(changes['mapping'].currentValue);
       }
       if (changes['sectionModel']) {
-        this.translationControl.setValue(changes['sectionModel'].currentValue._translation);
+        this.mappingControl.setValue(changes['sectionModel'].currentValue._translation);
       }
       if (changes['disabledArea']) {
-        var val = this.translationControl.value;
-        this.translationControl = new FormControl({ value: val, disabled: this.disabledArea != null && this.disabledArea });
+        var val = this.mappingControl.value;
+        this.mappingControl = new FormControl({ value: val, disabled: this.disabledArea != null && this.disabledArea });
       }
     }
   }

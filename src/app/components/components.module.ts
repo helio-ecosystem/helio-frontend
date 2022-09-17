@@ -3,7 +3,7 @@ import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { MarketplaceModule } from "./marketplace/marketplace.module";
 import { LayoutsModule } from "../layouts/layouts.module";
-import { TranslationModule } from "./translation/translation.module";
+import { MappingModule } from "./mapping/mapping.module";
 import { PlaygroundModule } from "./playground/playground.module";
 
 @NgModule({
@@ -11,7 +11,7 @@ import { PlaygroundModule } from "./playground/playground.module";
       LayoutsModule,
       HomeModule,
       MarketplaceModule,
-      TranslationModule,
+      MappingModule,
       PlaygroundModule,
       ErrorModule
     ],

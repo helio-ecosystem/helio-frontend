@@ -1,15 +1,16 @@
-export class TranslationModel {
-    private _id: string;
-    private _mappingProcessor: string;
-    private _threads: number;
-    private _body: string;
+export class MappingModel {
 
-    constructor({ id, mappingProcessor, threads, body }) {
-        this._id = id;
-        this._mappingProcessor = mappingProcessor;
-        this._threads = threads;
-        this._body = body;
-    }
+  private _id: string;
+  private _mappingProcessor: string;
+  private _threads: number;
+  private _body: string;
+
+  constructor({ id, mappingProcessor, threads, body }) {
+    this._id = id;
+    this._mappingProcessor = mappingProcessor;
+    this._threads = threads;
+    this._body = body;
+  }
 
   get id(): string {
     return this._id;

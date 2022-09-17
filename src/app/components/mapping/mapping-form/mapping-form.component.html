@@ -6,10 +6,10 @@
           <mat-button-toggle disabled="true">
             Select mode
           </mat-button-toggle>
-          <mat-button-toggle (click)="changeEditionMode(false)" checked aria-label="Translation details">
+          <mat-button-toggle (click)="changeEditionMode(false)" checked aria-label="Mapping details">
             <mat-icon>description</mat-icon>
           </mat-button-toggle>
-          <mat-button-toggle (click)="changeEditionMode(true)" aria-label="Edit translation">
+          <mat-button-toggle (click)="changeEditionMode(true)" aria-label="Edit mapping">
             <mat-icon>edit</mat-icon>
           </mat-button-toggle>
         </mat-button-toggle-group>
@@ -26,8 +26,8 @@
 
       <div class="col-12 mb-3">
         <mat-form-field appearance="outline">
-          <mat-label>Translation name</mat-label>
-          <input matInput placeholder="Type the translation name" formControlName="name" required>
+          <mat-label>Mapping name</mat-label>
+          <input matInput placeholder="Type the mapping name" formControlName="name" required>
         </mat-form-field>
 
       </div>
@@ -37,7 +37,7 @@
       <div class="col-12 mb-3">
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Tranlation template</mat-label>
-          <textarea matNativeControl placeholder="Type your translation" rows="15" formControlName="translation" required></textarea>
+          <textarea matNativeControl placeholder="Type your mapping" rows="15" formControlName="mapping" required></textarea>
         </mat-form-field>
       </div>
 
@@ -47,7 +47,7 @@
 
 
       <div class="col-12 mt-2" *ngIf="editionMode">
-        <a mat-flat-button class="btn success-btn" (click)="saveTranslation()">Save translation</a>
+        <a mat-flat-button class="btn success-btn" (click)="saveMapping()">Save mapping</a>
       </div>
   
 

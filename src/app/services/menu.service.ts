@@ -5,7 +5,7 @@ import { HomeModule } from '../components/home/home.module';
 import { MarketplaceModule } from '../components/marketplace/marketplace.module';
 import { PlaygroundModule } from '../components/playground/playground.module';
 import { TourModule } from '../components/tour/tour.module';
-import { TranslationModule } from '../components/translation/translation.module';
+import { MappingModule } from '../components/mapping/mapping.module';
 import { ModeValue } from '../shared/mode-value';
 
 @Injectable({
@@ -45,16 +45,16 @@ export class MenuService {
 
   private buildAppMenu() {
     var sectionMarketplace = new MenuOptionModel('storefront', MarketplaceModule.section, MarketplaceModule.uri);
-    var sectionTranslation = new MenuOptionModel('description', TranslationModule.section, '');
-    var subSectionTranslation = new MenuOptionModel('', 'List', TranslationModule.uri);
-    sectionTranslation.addChild(subSectionTranslation);
+    var sectionMapping = new MenuOptionModel('description', MappingModule.section, '');
+    var subSectionMapping = new MenuOptionModel('', 'List', MappingModule.uri);
+    sectionMapping.addChild(subSectionMapping);
 
     this.menu = [];
     this.menu.push(sectionMarketplace);
-    this.menu.push(sectionTranslation);
+    this.menu.push(sectionMapping);
     this.principalSection = sectionMarketplace;
     this.sectionsAvailables = [
-      MarketplaceModule.section, TranslationModule.section
+      MarketplaceModule.section, MappingModule.section
     ];
   }
 

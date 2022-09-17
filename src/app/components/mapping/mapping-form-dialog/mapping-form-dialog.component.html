@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-12">
-    <h2>New translation</h2>
+    <h2>New mapping</h2>
   </div>
 
   <div class="col-12">
 
     <mat-stepper #stepper (selectionChange)="onStepChanged($event)">
-      <mat-step label="Fill out the translation information" [stepControl]="firstFormStep"
-                errorMessage="{{ firstFormStep.controls['name'].invalid ? 'Name is required.' : firstFormStep.controls['translation'].invalid ? 'Translation is required' : '' }}">
+      <mat-step label="Fill out the mapping information" [stepControl]="firstFormStep"
+                errorMessage="{{ firstFormStep.controls['name'].invalid ? 'Name is required.' : firstFormStep.controls['mapping'].invalid ? 'Mapping is required' : '' }}">
         <form [formGroup]="firstFormStep" class="mt-4" [style.fontSize.px]="fontSizeControl.value > 20 ? 20 : fontSizeControl.value < 10 ? 10 : fontSizeControl.value">
 
           <div class="row">
@@ -24,16 +24,16 @@
  
             <div class="col-12 mb-3">
               <mat-form-field appearance="outline">
-                <mat-label>Translation name</mat-label>
-                <input matInput placeholder="Type the translation name" formControlName="name" required>
+                <mat-label>Mapping name</mat-label>
+                <input matInput placeholder="Type the mapping name" formControlName="name" required>
               </mat-form-field>
             </div>
 
 
             <div class="col-12 mb-5">
               <mat-form-field appearance="outline" style="width: 100%">
-                <mat-label>Tranlation template</mat-label>
-                <textarea matNativeControl placeholder="Type your translation" rows="15" formControlName="translation" required></textarea>
+                <mat-label>Mapping template</mat-label>
+                <textarea matNativeControl placeholder="Type your mapping" rows="15" formControlName="mapping" required></textarea>
               </mat-form-field>
             </div>
 
@@ -46,11 +46,11 @@
           </div>
         </form>
       </mat-step>
-      <mat-step label="Test your translation" [optional]="true">
+      <mat-step label="Test your mapping" [optional]="true">
 
         <div class="row mt-4 mb-5">
           <div class="col-12">
-            <playground-template [disabledArea]="true" [translation]="firstFormStep.controls['translation'].value"></playground-template>
+            <playground-template [disabledArea]="true" [mapping]="firstFormStep.controls['mapping'].value"></playground-template>
           </div>
         </div>
 
@@ -65,12 +65,12 @@
 
         <div class="row mt-4">
           <div class="col-12 mb-3" *ngIf="errorLastStep || !firstFormStep.valid">
-            <pre class="text-wrap alert-danger rounded p-2">{{ errorLastStep != null ? errorLastStep : 'Error: Check the translation information before saving.' }}</pre>
+            <pre class="text-wrap alert-danger rounded p-2">{{ errorLastStep != null ? errorLastStep : 'Error: Check the mapping information before saving.' }}</pre>
           </div>
 
           <div class="col-12 mb-5" style="text-align: center">
             <button mat-stroked-button matStepperPrevious>Back</button>
-            <a mat-flat-button class="success-btn btn-space-left" [disabled]="!firstFormStep.valid" (click)="saveTranslation()">Save translation</a>
+            <a mat-flat-button class="success-btn btn-space-left" [disabled]="!firstFormStep.valid" (click)="saveMapping()">Save mapping</a>
           </div>
         </div>
 

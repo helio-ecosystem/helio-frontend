@@ -16,7 +16,9 @@
     <ng-container *ngIf="table.rows">
 
         <tr *ngFor="let row of table.rows; let i = index">
-            <td colspan="2" *ngFor="let column of columns; let j = index" style="vertical-align: middle;">{{ row[j] }}</td>
+            <td colspan="2" *ngFor="let column of columns; let j = index" style="vertical-align: middle;">
+                <div [innerHtml]="row[j]"></div>
+            </td>
             <td *ngIf="actions" class="fit">
                 <ng-container *ngFor="let action of actions; let j = index">
                     <a mat-stroked-button class="{{ j > 0 ? action.clazz + ' btn-space-left' : action.clazz }}" (click)="onActionClicked(row, action.event)">
