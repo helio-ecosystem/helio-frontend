@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import {SettingsService} from "../../../services/settings.service";
+import { SecurityService } from 'src/app/services/security.service';
+import {SettingsService } from "../../../services/settings.service";
+import { PlaygroundModule } from '../playground.module';
 
 @Component({
   templateUrl: './playground-home.component.html',
@@ -8,10 +10,11 @@ import {SettingsService} from "../../../services/settings.service";
 export class PlaygroundHomeComponent {
 
   constructor(
-    private settings: SettingsService
-  )
+    private security: SecurityService,
+    private settings: SettingsService)
   {
-    this.settings.setSection('Playground');
+    this.security.redirectIfSectionUnavailable(PlaygroundModule.section);
+    this.settings.setSection(PlaygroundModule.section);
   }
 
 }

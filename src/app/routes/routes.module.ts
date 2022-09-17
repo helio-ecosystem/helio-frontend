@@ -9,7 +9,7 @@ import { routes } from './routes';
     declarations: [],
     exports: [
         RouterModule
-    ]
+    ],
 })
 
 export class RoutesModule {}

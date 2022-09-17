@@ -13,17 +13,63 @@
 
     <mat-nav-list class="mt-5">
 
-      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Home', 'item-menu': sectionTitle != 'Home' }">
+      <ng-container *ngFor="let item of optionsMenu">
+
+        <mat-list-item *ngIf="item.child.length == 0" [ngClass]="{
+              'item-selected': sectionTitle === item.title,
+              'item-menu': sectionTitle != item.title }">
+          
+          <mat-icon matListIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <a style="margin-left: 10px" routerLink="{{ item.uri }}" (click)="drawer.mode == 'over' ? drawer.close() : ''">{{ item.title }}</a>
+        
+        </mat-list-item>
+  
+        <mat-expansion-panel *ngIf="item.child.length > 0" [expanded]="sectionTitle === item.title"
+          class="mat-elevation-z0" style="background-color: #34515e; color: white" dense>
+          
+          <mat-expansion-panel-header>
+            <mat-panel-title [ngClass]="{
+                'mat-list-item-content': true,
+                'item-selected': sectionTitle === item.title,
+                'item-menu': sectionTitle != item.title }">
+
+                <mat-icon matListIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+                <span style="margin-left: 10px">{{ item.title }}</span>
+
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list style="background-color: white" class="rounded">
+
+            <mat-list-item *ngFor="let subItem of item.child" [ngClass]="{
+                  'child-item-selected': sectionTitle === item.title,
+                  'child-item-menu': sectionTitle != item.title }">
+
+              <a matLine routerLink="{{ subItem.uri }}" (click)="drawer.mode == 'over' ? drawer.close() : ''">{{ subItem.title }}</a>
+
+            </mat-list-item>
+
+          </mat-nav-list>
+
+        </mat-expansion-panel>
+
+
+
+      </ng-container>
+
+
+      <!--
+      <mat-list-item *ngIf="availableSection('Home')" [ngClass]="{'item-selected': sectionTitle === 'Home', 'item-menu': sectionTitle != 'Home' }">
         <mat-icon matListIcon>home</mat-icon>
         <a style="margin-left: 10px" routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
       </mat-list-item>
 
-      <mat-list-item *ngIf="displayAllMenuOptions" [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
+      <mat-list-item *ngIf="availableSection('Marketplace')" [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
         <mat-icon matListIcon>storefront</mat-icon>
         <a style="margin-left: 10px" routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
       </mat-list-item>
 
-      <mat-expansion-panel *ngIf="displayAllMenuOptions" class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
+      <mat-expansion-panel *ngIf="availableSection('Translation')" class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
         <mat-expansion-panel-header>
           <mat-panel-title [ngClass]="{'item-menu': true, 'mat-list-item-content': true}">
               <mat-icon matListIcon>insert_drive_file</mat-icon>
@@ -37,16 +83,17 @@
         </mat-nav-list>
       </mat-expansion-panel>
 
-      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Playground', 'item-menu': sectionTitle != 'Playground' }">
+      <mat-list-item *ngIf="availableSection('Playground')" [ngClass]="{'item-selected': sectionTitle === 'Playground', 'item-menu': sectionTitle != 'Playground' }">
         <mat-icon matListIcon>science</mat-icon>
         <a style="margin-left: 10px" routerLink="/playground" (click)="drawer.mode == 'over' ? drawer.close() : ''">Playground</a>
       </mat-list-item>
 
-      <mat-list-item [ngClass]="{'item-selected': sectionTitle === 'Tour', 'item-menu': sectionTitle != 'Tour' }">
+      <mat-list-item *ngIf="availableSection('Tour')" [ngClass]="{'item-selected': sectionTitle === 'Tour', 'item-menu': sectionTitle != 'Tour' }">
         <mat-icon matListIcon>tour</mat-icon>
         <a style="margin-left: 10px" routerLink="/tour" (click)="drawer.mode == 'over' ? drawer.close() : ''">Tour</a>
       </mat-list-item>
 
+      -->
     </mat-nav-list>
 
     <div class="footer-container"><app-footer></app-footer></div>

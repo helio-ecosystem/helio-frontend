@@ -1,11 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import {MenuService} from "../../services/menu.service";
+import { MenuService } from "../../services/menu.service";
 import { SettingsService } from 'src/app/services/settings.service';
-import {MatSidenav} from "@angular/material/sidenav";
-import {environment} from "../../../environments/environment";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MenuOptionModel } from '../../models/menu-option';
 
 @Component({
   selector: 'app-main',
@@ -16,8 +16,6 @@ export class MainComponent {
 
   translationSection = false;
 
-  displayAllMenuOptions = environment.interceptor.allOptionsMenu;
-
   @ViewChild('drawer') drawer: MatSidenav;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -26,15 +24,22 @@ export class MainComponent {
       shareReplay()
     );
 
-  sectionTitle = 'Home';
-  itemsMenu: any[] = [];
+  sectionTitle = '';
+  optionsMenu: MenuOptionModel[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private service: MenuService,
+              private menuService: MenuService,
               private settings: SettingsService) {
     this.settings.onChangeSection().subscribe({
-      next: (v) => this.sectionTitle = v
+      next: (v) => {
+        this.sectionTitle = v;
+      }
     });
+    this.optionsMenu = menuService.getMenu();
+  }
+
+  public availableSection(value: string): boolean {
+    return this.menuService.hasSection(value);
   }
 
 }

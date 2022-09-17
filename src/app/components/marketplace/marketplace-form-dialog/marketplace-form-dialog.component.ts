@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import {MatDialogRef} from "@angular/material/dialog";
 import { ComponentModel } from 'src/app/models/component';
 import { ComponentService } from 'src/app/services/component.service';
-import { types } from '../component-types';
+import { types } from '../../../shared/component-types';
 
 @Component({
   templateUrl: './marketplace-form-dialog.component.html',

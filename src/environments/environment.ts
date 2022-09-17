@@ -2,12 +2,12 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {InterceptorDisabledService} from "../app/services/interceptor/interceptor_disabled.service";
+import { ModeValue } from "src/app/shared/mode-value";
 
 export const environment = {
   production: false,
   host: 'http://localhost:4567',
-  interceptor: InterceptorDisabledService
+  mode: ModeValue.APP
 };
 
 /*

@@ -4,6 +4,8 @@ import {TranslationService} from "../../../services/translation.service";
 import {TranslationModel} from "../../../models/translation";
 import { TourService } from 'src/app/services/tour.service';
 import { SettingsService } from 'src/app/services/settings.service';
+import { SecurityService } from 'src/app/services/security.service';
+import { TranslationModule } from '../translation.module';
 
 @Component({
   templateUrl: './translation-details.component.html',
@@ -19,11 +21,14 @@ export class TranslationDetailsComponent implements OnInit {
   notificationSaved;
 
   constructor(
+    private security: SecurityService,
     private route: ActivatedRoute,
     private router: Router,
     private settings: SettingsService,
-    private service: TranslationService) {
-    this.settings.setSection('Translation');
+    private service: TranslationService)
+  {
+    this.security.redirectIfSectionUnavailable(TranslationModule.section);
+    this.settings.setSection(TranslationModule.section);
     this.route.params.subscribe(params => this.id = params['id']);
   }
 

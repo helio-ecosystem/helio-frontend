@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourSectionModel } from 'src/app/models/tour-section';
+import { SecurityService } from 'src/app/services/security.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { TourService } from 'src/app/services/tour.service';
+import { TourModule } from '../tour.module';
 
 @Component({
     templateUrl: 'tour-section.component.html'
@@ -15,12 +17,14 @@ export class TourSectionComponent {
   nextSection: TourSectionModel = null;
 
   constructor(
+    private security: SecurityService,
     private route: ActivatedRoute,
     private router: Router,
     private service: TourService,
     private settings: SettingsService)
   {
-    this.settings.setSection('Tour');
+    this.security.redirectIfSectionUnavailable(TourModule.section);
+    this.settings.setSection(TourModule.section);
     this.route.params.subscribe(params => {
       if (params['id'] == null) {
         this.currentSection = this.service.allSections();

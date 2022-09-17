@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
     templateUrl: 'error.component.html',
@@ -7,10 +8,12 @@ import { Router } from '@angular/router';
 })
 export class ErrorComponent {
 
+    section: string;
     uri: string;
 
-    constructor(private router: Router) {
-        this.uri = router.url;
+    constructor(private menu: MenuService) {
+        this.section = this.menu.getPrincipalSection();
+        this.uri = this.menu.getPrincipalSectionUri();
     }
 
 }

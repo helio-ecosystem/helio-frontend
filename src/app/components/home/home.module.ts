@@ -20,4 +20,7 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class HomeModule {}
+export class HomeModule {
+    static section = 'Home';
+    static uri = '/home';
+}

@@ -41,4 +41,7 @@ const routes: Routes = [
     exports: [
     ]
 })
-export class TourModule {}
+export class TourModule {
+  static section = 'Tour';
+  static uri = '/tour';
+}

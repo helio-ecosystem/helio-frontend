@@ -59,4 +59,7 @@ const routes: Routes = [
         RouterModule,
     ]
 })
-export class TranslationModule {}
+export class TranslationModule {
+  static section = 'Translations';
+  static uri = '/translations';
+}

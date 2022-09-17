@@ -37,4 +37,7 @@ const routes: Routes = [
 
     ]
 })
-export class PlaygroundModule {}
+export class PlaygroundModule {
+  static section = 'Playground';
+  static uri = '/playground';
+}

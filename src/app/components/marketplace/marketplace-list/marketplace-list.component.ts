@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {ComponentModel} from "../../../models/component";
-import {SettingsService} from "../../../services/settings.service";
-import {ComponentService} from "../../../services/component.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MarketplaceFormDialogComponent} from "../marketplace-form-dialog/marketplace-form-dialog.component";
-import { types, iconTypes } from '../component-types';
-import { MarketplaceDeleteDialogComponent } from '../marketplace-delete-dialog/marketplace-delete-dialog.component';
+import { Component } from '@angular/core';
+import { ComponentModel } from "../../../models/component";
+import { SettingsService } from "../../../services/settings.service";
+import { ComponentService } from "../../../services/component.service";
+import { MatDialog } from "@angular/material/dialog";
+import { MarketplaceFormDialogComponent } from "../marketplace-form-dialog/marketplace-form-dialog.component";
+import { types, iconTypes } from '../../../shared/component-types';
+import { SecurityService } from 'src/app/services/security.service';
+import { MarketplaceModule } from '../marketplace.module';
 
 @Component({
   templateUrl: './marketplace-list.component.html',
@@ -25,11 +26,13 @@ export class MarketplaceListComponent {
   notification;
 
   constructor(
+    private security: SecurityService,
     private settings: SettingsService,
     private service: ComponentService,
     private dialog: MatDialog)
   {
-    this.settings.setSection('Marketplace');
+    this.security.redirectIfSectionUnavailable(MarketplaceModule.section);
+    this.settings.setSection(MarketplaceModule.section);
     this.search();
   }
 

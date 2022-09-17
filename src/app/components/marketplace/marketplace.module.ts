@@ -45,4 +45,7 @@ const routes: Routes = [
         RouterModule,
     ]
 })
-export class MarketplaceModule {}
+export class MarketplaceModule {
+  static section = 'Marketplace';
+  static uri = '/marketplace';
+}

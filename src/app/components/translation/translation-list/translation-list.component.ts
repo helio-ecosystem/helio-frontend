@@ -9,6 +9,8 @@ import { TourService } from 'src/app/services/tour.service';
 import { RowActionModel } from 'src/app/models/row-action';
 import { RowResponseModel } from 'src/app/models/row-action response';
 import { TranslationDeteleDialogComponent } from '../translation-detele-dialog/translation-detele-dialog.component';
+import { TranslationModule } from '../translation.module';
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-translation-list',
@@ -35,12 +37,14 @@ export class TranslationListComponent {
   notification = null;
 
   constructor(
+    private security: SecurityService,
     private settings: SettingsService,
     private service: TranslationService,
     private router: Router,
     private dialog: MatDialog)
   {
-    this.settings.setSection('Translation');
+    this.security.redirectIfSectionUnavailable(TranslationModule.section);
+    this.settings.setSection(TranslationModule.section);
     this.search();
   }
 
