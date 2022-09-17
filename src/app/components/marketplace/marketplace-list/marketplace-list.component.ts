@@ -41,21 +41,18 @@ export class MarketplaceListComponent {
     this.componentsAvailable = [];
     this.rowData = [];
     this.error = null;
-
     this.service.list().subscribe({
-      next: (v) => v.forEach(item => this.componentsInstalled.push(new ComponentModel(item)) ),
+      next: (v) => this.componentsInstalled = v,
       error: (e) => this.error = 'Cannot retrieve components installed. Try again with refresh button.'
     });
-
-    //this.componentsInstalled = this.dummy;
   }
 
   create() {
     const dialogRef = this.dialog.open(MarketplaceFormDialogComponent);
     dialogRef.afterClosed().subscribe((newComponent: ComponentModel) => {
       if (newComponent) {
-        this.componentsInstalled.push(newComponent);
         this.addTemporalNotification('Installed component ' + newComponent.name + ' successfuly!');
+        this.search(); // Invoke 'search' to get components Ids
       }
     });
   }

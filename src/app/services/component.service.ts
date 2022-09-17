@@ -9,12 +9,29 @@ import { ComponentModel } from '../models/component';
 export class ComponentService extends RestService {
 
   list(): Observable<ComponentModel[]> {
-    return super.get('/component');
+    return new Observable(observable => {
+      super.get('/component').subscribe({
+        next: (value) => {
+          var data: ComponentModel[] = [];
+          if (value) {
+            value.forEach(item => {
+              data.push(new ComponentModel({
+                'id': item.id,
+                'source': item.component.source,
+                'clazz': item.component.clazz,
+                'type': item.component.type
+              }));
+            });
+          }
+          observable.next(data);
+        },
+        error: (e) => observable.error(e),
+        complete: () => observable.complete()
+      });
+    });
   }
 
   addComponent(component: ComponentModel): Observable<ComponentModel> {
-    console.log(component);
-    console.log(component.toJson());
     return super.post('/component', component.toJson());
   }
 

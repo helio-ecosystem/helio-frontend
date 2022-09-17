@@ -1,24 +1,34 @@
 export class ComponentModel {
 
-    private _name: string;
-    private _source: string;
-    private _clazz: string;
-    private _type: string;
+  private _id: string;
+  private _name: string;
+  private _source: string;
+  private _clazz: string;
+  private _type: string;
 
-    constructor({ source, clazz, type }) {
-        this._source = source;
-        this._clazz = clazz;
-        this._type = type;
-        // Extract repository name by regex
-        //this._name = source.match('^.*\\/helio-ecosystem\\/([^\\/]*).*$')[1];
-        try {
-          //this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
-          this._name = this._clazz.split('.').reverse()[0];
-        }
-        catch(e) {
-          this._name = this._clazz;
-        }
+  constructor({ id, source, clazz, type }) {
+    this._id = id;
+    this._source = source;
+    this._clazz = clazz;
+    this._type = type;
+    // Extract repository name by regex
+    //this._name = source.match('^.*\\/helio-ecosystem\\/([^\\/]*).*$')[1];
+    try {
+      //this._name = source.match('([a-zA-Z|\-]+)-.*$')[1].replaceAll('-', ' ');
+      this._name = this._clazz.split('.').reverse()[0];
     }
+    catch (e) {
+      this._name = this._clazz;
+    }
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(value: string) {
+    this._id = value;
+  }
 
   get name(): string {
     return this._name;
