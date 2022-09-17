@@ -7,6 +7,7 @@ import { MarketplaceFormDialogComponent } from "../marketplace-form-dialog/marke
 import { types, iconTypes } from '../../../shared/component-types';
 import { SecurityService } from 'src/app/services/security.service';
 import { MarketplaceModule } from '../marketplace.module';
+import { MarketplaceDeleteDialogComponent } from '../marketplace-delete-dialog/marketplace-delete-dialog.component';
 
 @Component({
   templateUrl: './marketplace-list.component.html',
@@ -57,7 +58,7 @@ export class MarketplaceListComponent {
     });
   }
 
-/*
+
   deleteComponent(component: ComponentModel) {
     const dialogRef = this.dialog.open(MarketplaceDeleteDialogComponent, { data: component });
     dialogRef.afterClosed().subscribe(result => {
@@ -70,7 +71,7 @@ export class MarketplaceListComponent {
       }
     });
   }
-*/
+
 
   private addTemporalNotification(msg) {
     this.notification = { type: 'success', data: msg };
