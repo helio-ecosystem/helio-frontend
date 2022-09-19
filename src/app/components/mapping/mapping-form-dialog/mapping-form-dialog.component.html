@@ -17,15 +17,27 @@
                 <mat-label>Font size</mat-label>
                 <input matInput type="number" placeholder="Ex. 16" [formControl]="fontSizeControl" min="10" max="20">
                 <span matSuffix>px</span>
+                <mat-hint>Select the form visualization size</mat-hint>
                 <mat-error *ngIf="fontSizeControl.invalid">Size must be between 10px and 20px</mat-error>
               </mat-form-field>
             </div>
 
  
-            <div class="col-12 mb-3">
-              <mat-form-field appearance="outline">
+            <div class="col-6 mb-3">
+              <mat-form-field appearance="outline" style="width: 100%">
                 <mat-label>Mapping name</mat-label>
                 <input matInput placeholder="Type the mapping name" formControlName="name" required>
+                <mat-hint>Type the mapping name</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-6 mb-3">
+              <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Builder</mat-label>
+                <mat-select formControlName="builder" required>
+                  <mat-option *ngFor="let type of builderTypes;" value="{{ type }}">{{ type }}</mat-option>
+                </mat-select>
+                <mat-hint>Select the builder to perform the mapping</mat-hint>
               </mat-form-field>
             </div>
 
@@ -34,6 +46,7 @@
               <mat-form-field appearance="outline" style="width: 100%">
                 <mat-label>Mapping template</mat-label>
                 <textarea matNativeControl placeholder="Type your mapping" rows="15" formControlName="mapping" required></textarea>
+                <mat-hint>Type the mapping details</mat-hint>
               </mat-form-field>
             </div>
 

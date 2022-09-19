@@ -54,7 +54,7 @@ export class MappingDetailsComponent implements OnInit {
   }
 
   backToMappingList() {
-    this.router.navigate(['/mapping']);
+    this.router.navigate([MappingModule.uri]);
   }
 
 }

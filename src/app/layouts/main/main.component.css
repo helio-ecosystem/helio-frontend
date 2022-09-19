@@ -26,24 +26,36 @@
   width: 100%;
 }
 
-.item-selected, .item-menu:hover {
+.item-selected {
+  background-color: #37474f;
+  color: white;
+}
+
+.item-menu:hover {
+  background-color: #37474f;
   color: white;
 }
 
 .item-menu {
+  background-color: #263238;
   color: gray;
 }
+
+.header-item-menu {
+  color: gray;
+}
+
+.header-item-menu:hover {
+  color: white;
+}
+
+.header-item-selected { 
+  color: white;
+}
+
+
 
 .content-wrapper {
   background-color: #f8f9fc;
 }
 
-.child-item-menu:hover {
-  color: darkgray;
-}
-.child-item-menu {
-  color: black;
-}
-.child-item-selected {
-  color: #3f51b5;
-}

@@ -14,6 +14,7 @@
                   <mat-label>Font size</mat-label>
                   <input matInput type="number" placeholder="Ex. 16" [formControl]="fontSizeControl" min="10" max="20">
                   <span matSuffix>px</span>
+                  <mat-hint>Select the form visualization size</mat-hint>
                   <mat-error *ngIf="fontSizeControl.invalid">Size must be between 10px and 20px</mat-error>
                 </mat-form-field>
               </div>
@@ -23,7 +24,7 @@
                 <mat-form-field appearance="outline" style="width: 100%">
                   <mat-label>Source</mat-label>
                   <input matInput placeholder="Type the source" formControlName="source" required>
-                  <mat-hint>Type the url from <a href="https://github.com/helio-ecosystem" target="_blank">Helio-Ecosystem components repository</a> available.</mat-hint>
+                  <mat-hint>Type the component url available from <a href="https://github.com/helio-ecosystem" target="_blank">Helio components repository</a></mat-hint>
                 </mat-form-field>
               </div>
   

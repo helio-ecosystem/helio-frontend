@@ -72,7 +72,7 @@ export class MappingListComponent {
     sourceData.forEach(s => this.addRowInTable(s));
   }
 
-  private addRowInTable(newData) {
+  private addRowInTable(newData: MappingModel) {
     var d: MappingModel = new MappingModel(JSON.parse(JSON.stringify(newData)));
     if (d.id && d.id != TourService.playground_mapping_id) {
       this.data.push([d.id, d.mappingProcessor, 
@@ -90,7 +90,7 @@ export class MappingListComponent {
 
   rowActionSelected(action: RowResponseModel): void {
     if (action.event == 'edit') {
-      this.router.navigate(['/mapping/details/' + action.row[0]]);
+      this.router.navigate(['/mappings/details/' + action.row[0]]);
     }
     else if (action.event == 'delete') {
       this.deleteDialog(action.row[0]);
@@ -99,7 +99,7 @@ export class MappingListComponent {
   
   create() {
     const dialogRef = this.dialog.open(MappingFormDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: MappingModel) => {
       if (result) {
         this.addRowInTable(result);
         this.addTemporalNotification('Mapping "' + result.id + '" added correctly.');
@@ -114,18 +114,13 @@ export class MappingListComponent {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      /*
       if (result && result.status == 'ok') {
         this.removeRowInTable(result.data);
-        this.addTemporalNotification('Translation "' + result.data + '" deleted correctly.');
+        this.addTemporalNotification('Mapping "' + result.data + '" deleted correctly.');
       }
       else if (result && result.status == 'error') {
-        this.addTemporalErrorNotification('Translation "' + result.data + '" deleted correctly.');
+        this.addTemporalErrorNotification('Mapping "' + result.data + '" deleted correctly.');
       }
-      */
-     if (result) {
-      this.addTemporalErrorNotification('Mapping "' + result.data + '" deleted correctly.');
-     }
     });
   }
 

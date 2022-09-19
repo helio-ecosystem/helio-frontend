@@ -9,6 +9,7 @@ import { MappingDetailsComponent } from './mapping-details/mapping-details.compo
 import { MappingFormDialogComponent } from './mapping-form-dialog/mapping-form-dialog.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSelectModule } from '@angular/material/select';
 import { MatLineModule } from "@angular/material/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,6 +36,7 @@ const routes: Routes = [
     MatIconModule,
     MatLineModule,
     MatCardModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,

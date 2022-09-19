@@ -36,7 +36,7 @@ export class MappingService extends RestService {
   }
 
   add(data: MappingModel): Observable<any> {
-    return super.post('/api/' + data.id, data.body, this.textHeaders);
+    return super.post('/api/' + data.id + '?builder=' + data.mappingProcessor, data.body, this.textHeaders);
   }
 
   remove(id: string): Observable<any> {

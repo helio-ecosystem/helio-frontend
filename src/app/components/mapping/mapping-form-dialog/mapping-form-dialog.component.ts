@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { MappingService } from "../../../services/mapping.service";
 import { MappingModel } from "../../../models/mapping";
 import { TourService } from "../../../services/tour.service";
+import { types } from '../../../shared/builder-types';
 
 @Component({
   templateUrl: './mapping-form-dialog.component.html',
@@ -11,10 +12,12 @@ import { TourService } from "../../../services/tour.service";
 })
 export class MappingFormDialogComponent {
 
+  builderTypes = types;
+
   firstFormStep: FormGroup;
   fontSizeControl;
   errorLastStep: string;
-
+ 
   private model: MappingModel =
     new MappingModel({ id: TourService.playground_mapping_id, mappingProcessor: '', threads: 1, body: '' });
 
@@ -26,9 +29,10 @@ export class MappingFormDialogComponent {
     this.fontSizeControl = new FormControl(15);
     this.firstFormStep = fb.group({
       'name': ['', Validators.required],
+      'builder': [this.builderTypes[0], Validators.required],
       'mapping': ['', Validators.required]
     });
-
+    
   }
 
   onStepChanged(step: any): void {
@@ -41,6 +45,7 @@ export class MappingFormDialogComponent {
     this.errorLastStep = null;
     if (this.firstFormStep.valid) {
       this.model.id = this.firstFormStep.controls['name'].value;
+      this.model.mappingProcessor = this.firstFormStep.controls['builder'].value;
       this.model.body = this.firstFormStep.controls['mapping'].value;
 
       this.service.details(this.model.id).subscribe({
@@ -53,7 +58,10 @@ export class MappingFormDialogComponent {
               this.model.threads = dataValue.threads;
               this.dialog.close(this.model);
             },
-            error: (e) => this.errorLastStep = 'Error: ' + e
+            error: (e) => {
+              //this.errorLastStep = 'Error: ' + JSON.stringify(e);
+              this.dialog.close(this.model);
+            }
           });
         }
       });
