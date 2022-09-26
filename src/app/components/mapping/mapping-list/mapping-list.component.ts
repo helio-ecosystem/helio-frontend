@@ -4,7 +4,6 @@ import { MappingModel } from "../../../models/mapping";
 import { MappingService } from "../../../services/mapping.service";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { TourService } from 'src/app/services/tour.service';
 import { RowActionModel } from 'src/app/models/row-action';
 import { RowResponseModel } from 'src/app/models/row-action response';
 import { SecurityService } from 'src/app/services/security.service';
@@ -12,6 +11,7 @@ import { MappingModule } from '../mapping.module';
 import { MappingFormDialogComponent } from '../mapping-form-dialog/mapping-form-dialog.component';
 import { MappingDeteleDialogComponent } from '../mapping-detele-dialog/mapping-detele-dialog.component';
 import { environment } from 'src/environments/environment';
+import { PlaygroundModule } from '../../playground/playground.module';
 
 @Component({
   selector: 'app-mapping-list',
@@ -74,11 +74,11 @@ export class MappingListComponent {
 
   private addRowInTable(newData: MappingModel) {
     var d: MappingModel = new MappingModel(JSON.parse(JSON.stringify(newData)));
-    if (d.id && d.id != TourService.playground_mapping_id) {
+    if (d.id && d.id != PlaygroundModule.mappingId) {
       this.data.push([d.id, d.mappingProcessor, 
         '<a target="_blank" href="' + environment.host + '/api/' + d.id + '/data' + '">Get data value</a>']);
     }
-    else if (newData.id && newData.id != TourService.playground_mapping_id) {
+    else if (newData.id && newData.id != PlaygroundModule.mappingId) {
       this.data.push([newData.id, newData.mappingProcessor, 
         '<a target="_blank" href="' + environment.host + '/api/' + newData.id + '/data' + '">Get data value</a>']);
     }

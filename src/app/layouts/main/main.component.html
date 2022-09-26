@@ -14,7 +14,7 @@
 
       <ng-container *ngFor="let item of optionsMenu">
 
-        <a style="margin-left: 10px" *ngIf="item.child.length == 0"
+        <a *ngIf="item.child.length == 0"
             routerLink="{{ item.uri }}"
             (click)="drawer.mode == 'over' ? drawer.close() : ''">
             <mat-list-item [ngClass]="{
@@ -58,20 +58,6 @@
 
             </mat-list-item>
 
-<!--
-            <a matLine *ngFor="let subItem of item.child" routerLink="{{ subItem.uri }}" (click)="drawer.mode == 'over' ? drawer.close() : ''">
-
-              <mat-list-item style="background-color: #455a64; color: white; width: 100%"
-                [ngClass]="{
-                    'child-item-selected': sectionTitle === item.title,
-                    'child-item-menu': sectionTitle != item.title }">
-                    
-                    {{ subItem.title }}
-
-              </mat-list-item>
-
-            </a>
--->
 
           </mat-nav-list>
 
@@ -81,43 +67,6 @@
 
       </ng-container>
 
-
-      <!--
-      <mat-list-item *ngIf="availableSection('Home')" [ngClass]="{'item-selected': sectionTitle === 'Home', 'item-menu': sectionTitle != 'Home' }">
-        <mat-icon matListIcon>home</mat-icon>
-        <a style="margin-left: 10px" routerLink="/home" (click)="drawer.mode == 'over' ? drawer.close() : ''">Home</a>
-      </mat-list-item>
-
-      <mat-list-item *ngIf="availableSection('Marketplace')" [ngClass]="{'item-selected': sectionTitle === 'Marketplace', 'item-menu': sectionTitle != 'Marketplace' }">
-        <mat-icon matListIcon>storefront</mat-icon>
-        <a style="margin-left: 10px" routerLink="/marketplace" (click)="drawer.mode == 'over' ? drawer.close() : ''">Marketplace</a>
-      </mat-list-item>
-
-      <mat-expansion-panel *ngIf="availableSection('Translation')" class="mat-elevation-z0 item-selected" style="background-color: #34515e; color: white" dense>
-        <mat-expansion-panel-header>
-          <mat-panel-title [ngClass]="{'item-menu': true, 'mat-list-item-content': true}">
-              <mat-icon matListIcon>insert_drive_file</mat-icon>
-              <span style="margin-left: 10px">Translations</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-nav-list style="background-color: white" class="rounded">
-          <mat-list-item [ngClass]="{'child-item-selected': sectionTitle === 'Translation', 'child-item-menu': sectionTitle != 'Translation' }">
-            <a matLine routerLink="/translations" (click)="drawer.mode == 'over' ? drawer.close() : ''">List</a>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-expansion-panel>
-
-      <mat-list-item *ngIf="availableSection('Playground')" [ngClass]="{'item-selected': sectionTitle === 'Playground', 'item-menu': sectionTitle != 'Playground' }">
-        <mat-icon matListIcon>science</mat-icon>
-        <a style="margin-left: 10px" routerLink="/playground" (click)="drawer.mode == 'over' ? drawer.close() : ''">Playground</a>
-      </mat-list-item>
-
-      <mat-list-item *ngIf="availableSection('Tour')" [ngClass]="{'item-selected': sectionTitle === 'Tour', 'item-menu': sectionTitle != 'Tour' }">
-        <mat-icon matListIcon>tour</mat-icon>
-        <a style="margin-left: 10px" routerLink="/tour" (click)="drawer.mode == 'over' ? drawer.close() : ''">Tour</a>
-      </mat-list-item>
-
-      -->
     </mat-nav-list>
 
     <div class="footer-container"><app-footer></app-footer></div>

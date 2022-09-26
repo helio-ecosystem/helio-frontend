@@ -3,8 +3,8 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MappingService } from "../../../services/mapping.service";
 import { MappingModel } from "../../../models/mapping";
-import { TourService } from "../../../services/tour.service";
 import { types } from '../../../shared/builder-types';
+import { PlaygroundModule } from '../../playground/playground.module';
 
 @Component({
   templateUrl: './mapping-form-dialog.component.html',
@@ -19,7 +19,7 @@ export class MappingFormDialogComponent {
   errorLastStep: string;
  
   private model: MappingModel =
-    new MappingModel({ id: TourService.playground_mapping_id, mappingProcessor: '', threads: 1, body: '' });
+    new MappingModel({ id: PlaygroundModule.mappingId, mappingProcessor: '', threads: 1, body: '' });
 
   constructor(
     private dialog: MatDialogRef<MappingFormDialogComponent>,

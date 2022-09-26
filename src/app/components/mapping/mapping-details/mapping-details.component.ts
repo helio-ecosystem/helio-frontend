@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { MappingService } from "../../../services/mapping.service";
 import { MappingModel } from "../../../models/mapping";
-import { TourService } from 'src/app/services/tour.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { SecurityService } from 'src/app/services/security.service';
 import { MappingModule } from '../mapping.module';
+import { PlaygroundModule } from '../../playground/playground.module';
 
 @Component({
   templateUrl: './mapping-details.component.html',
@@ -36,7 +36,7 @@ export class MappingDetailsComponent implements OnInit {
     if (!this.id) {
       this.error = 'You have to select a mapping item';
     }
-    else if (this.id == TourService.playground_mapping_id) {
+    else if (this.id == PlaygroundModule.mappingId) {
       this.error = 'Mapping with id ' + this.id + ' is not available.';
     }
     else {

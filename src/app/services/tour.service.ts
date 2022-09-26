@@ -1,42 +1,79 @@
 import { Injectable } from '@angular/core';
-import {TourSectionModel} from "../models/tour-section";
-import allSectionsInJsonFile from '../components/tour/sections.json';
+import { GitHubApiService } from './github-api.service';
+import { Observable } from 'rxjs';
+import { TutorialSection } from '../models/tutorial-section';
+import { TutorialModel } from '../models/tutorial';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
+  
+  // Relative path in repository to tours folder
+  // It's important to end with slash
+  private BASE_PATH = 'tour/';
+  private DIR_TYPE = 'tree';
+  private FILE_TYPE = 'blob';
 
-  private tourSections: TourSectionModel[] = [];
+  constructor(private github: GitHubApiService) {}
 
-  public static playground_mapping_id = 'playground';
 
-  constructor() {
-    allSectionsInJsonFile.forEach((value, index: number) => this.tourSections.push(new TourSectionModel({
-      sectionId: String(value.name).toLowerCase().replaceAll(' ', '-').replaceAll(/[^a-zA-Z\d-]/g, ''),
-      name: value.name,
-      description: value.description,
-      translation: value.translation_template,
-      resultTranslation: value.expected_results
-    })));
+  tourDirectory(): Observable<TutorialSection[]> {
+    return new Observable<any>(observable => {
+      this.github.repositoryFileTree().subscribe({
+        next: (files) => {
+          try {
+            var tutorialSections: TutorialSection[] = [];
+            files['tree'].forEach(file => {
+              var isInPath = file['path'].startsWith(this.BASE_PATH);
+
+              // Only we manage one-level-deep
+              if (isInPath && file['type'] == this.DIR_TYPE) {
+                  var item = new TutorialSection();
+                  item.name = this.removeSpecialChars(file['path'].replace(this.BASE_PATH, ''));
+                  tutorialSections.push(item);
+              }
+              else if (isInPath && file['type'] == this.FILE_TYPE) {
+                  var relativePath = file['path'].replace(this.BASE_PATH, '').split('/');
+                  var parentName = this.removeSpecialChars(relativePath[0]);
+                  var childName = this.removeSpecialChars(relativePath[1]).replace('.json', '');
+
+                  var child = new TutorialSection();
+                  child.name = childName;
+                  child.path = relativePath[0] + '/' + relativePath[1].replace('.json', '');
+
+                  var parentIndex = tutorialSections.findIndex(t => t.name === parentName);
+                  if (parentIndex != -1) {
+                    tutorialSections[parentIndex].addChild(child);
+                  }
+                  else {
+                      var parent = new TutorialSection();
+                      parent.name = parentName;
+                      parent.addChild(child);
+                      tutorialSections.push(parent);
+                  }
+              }
+
+            });
+            observable.next(tutorialSections);
+          }
+          catch(error) {
+            observable.error(error);
+          }
+        },
+        error: (e) => observable.error(e),
+        complete: () => observable.complete()
+      });
+    });
   }
 
-  allSections(): TourSectionModel[] {
-    return this.tourSections;
+
+  tutorialContent(path: string): Observable<TutorialModel> {
+    return this.github.contentFile(this.BASE_PATH + path);
   }
 
-  section(id: string): TourSectionModel {
-    return this.tourSections.find(p => p.sectionId == id);
-  }
-
-  previousSection(currentSectionId: string): TourSectionModel {
-    const index = this.tourSections.findIndex(p => p.sectionId == currentSectionId);
-    return (index - 1 >= 0) ? this.tourSections[index - 1] : null;
-  }
-
-  nextSection(currentSectionId: string): TourSectionModel {
-    const index = this.tourSections.findIndex(p => p.sectionId == currentSectionId);
-    return (index + 1 < this.tourSections.length) ? this.tourSections[index + 1] : null;
+  removeSpecialChars(value: string): string {
+    return value.replace('_', ' ').replace('-', ' ');
   }
 
 }

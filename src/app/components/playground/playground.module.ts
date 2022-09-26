@@ -40,4 +40,5 @@ const routes: Routes = [
 export class PlaygroundModule {
   static section = 'Playground';
   static uri = '/playground';
+  static mappingId = 'playground';
 }

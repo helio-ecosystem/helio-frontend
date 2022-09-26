@@ -13,11 +13,13 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { TourSectionComponent } from './tour-section/tour-section.component';
 import { PlaygroundExportModule } from '../playground/playground-export.module';
+import { MatListModule } from '@angular/material/list';
 
 // This Module's Components
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: TourSectionComponent },
-  { path: ':id', component: TourSectionComponent },
+  { path: ':parent', component: TourSectionComponent },
+  { path: ':parent/:child', component: TourSectionComponent },
 ];
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ const routes: Routes = [
     MatIconModule,
     MatLineModule,
     MatCardModule,
+    MatListModule,
     FormsModule,
     ReactiveFormsModule,
     CodeEditorModule.forRoot(),
