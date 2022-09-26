@@ -1,4 +1,5 @@
 // Angular Imports
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutsModule } from 'src/app/layouts/layouts.module';
@@ -10,6 +11,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        CommonModule,
         LayoutsModule,
         RouterModule.forChild(routes)
     ],

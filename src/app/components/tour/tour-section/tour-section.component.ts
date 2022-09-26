@@ -15,7 +15,7 @@ export class TourSectionComponent {
   sectionName = null;
   tutorialName = null;
 
-  tutorialSections: TutorialSection[] = [];
+  tutorialSections: TutorialSection[] = null;
   tutorialSelected: TutorialModel = null;
 
   errorResponse;

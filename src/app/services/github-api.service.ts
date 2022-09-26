@@ -8,23 +8,34 @@ import { TutorialModel } from '../models/tutorial';
 })
 export class GitHubApiService {
 
-  private repository = 'EmilioCrespoPeran/sample/'; 
+  private repository = 'EmilioCrespoPeran/sample/';
   private host = 'https://api.github.com/repos/' + this.repository;
   private branch = 'main';
   
   private query = '?ref=' + this.branch;
   
-  private headers = {
+  private headers: Object = {
     headers: new HttpHeaders({})
   };
 
-  private headersContentFile = {
+  private headersContentFile: Object = {
     headers: new HttpHeaders({
       Accept: 'application/vnd.github.VERSION.raw'
     })
   };
 
+  private headersMarkdownFile: Object = {
+    headers: new HttpHeaders({
+      Accept: 'application/vnd.github.VERSION.html'
+    }),
+    responseType: 'text'
+  }
+  
   constructor(private http: HttpClient) { }
+
+  repositoryMarkdown(): Observable<any> {
+    return this.http.get(this.host + 'contents/README.md' + this.query, this.headersMarkdownFile);
+  }
 
   repositoryFileTree(): Observable<any> {
     return this.http.get(this.host + 'git/trees/' + this.branch + '?recursive=1', this.headers);
