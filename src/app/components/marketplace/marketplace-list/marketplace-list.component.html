@@ -53,9 +53,9 @@
             <h2>{{ component.name }}</h2>
           </div>
           
-          <div class="col-2" style="text-align: center">
-            <a mat-button *ngIf="component.source.startsWith('./')" disabled="true" style="margin-right: 10px;"><mat-icon>delete</mat-icon></a>
-            <a mat-button *ngIf="!component.source.startsWith('./')" (click)="deleteComponent(component)" style="margin-right: 10px;"><mat-icon>delete</mat-icon></a>
+          <div class="col-2">
+            <a mat-button *ngIf="component.source.startsWith('./')" disabled="true"><mat-icon>delete</mat-icon></a>
+            <a mat-button *ngIf="!component.source.startsWith('./')" (click)="deleteComponent(component)"><mat-icon>delete</mat-icon></a>
           </div>
           
         </div>

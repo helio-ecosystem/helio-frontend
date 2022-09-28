@@ -45,9 +45,7 @@ export class GitHubApiService {
     return new Observable(observable => {
       this.http.get(this.host + 'contents/' + filepath + this.query, this.headersContentFile).subscribe({
         next: (v) => {
-          var raw = JSON.parse(JSON.stringify(v));
-          var model = new TutorialModel(raw);
-          observable.next(model);
+          observable.next(v);
         },
         error: (e) => observable.error(e),
         complete: () => observable.complete()

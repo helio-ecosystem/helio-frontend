@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { MenuOptionModel } from 'src/app/models/menu-option';
-import { environment } from 'src/environments/environment';
 import { HomeModule } from '../components/home/home.module';
 import { MarketplaceModule } from '../components/marketplace/marketplace.module';
 import { PlaygroundModule } from '../components/playground/playground.module';
 import { TourModule } from '../components/tour/tour.module';
 import { MappingModule } from '../components/mapping/mapping.module';
-import { ModeValue } from '../shared/mode-value';
+import { SettingsService } from './settings.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuService {
 
-  private mode = environment.mode;
+  
   private sectionsAvailables = [];
   private menu = [];
   private principalSection: MenuOptionModel;
 
-  constructor() {
-    if (this.mode == ModeValue.APP) {
+  constructor(private settings: SettingsService) {
+    if (this.settings.isApplicationMode()) {
       this.buildAppMenu();
     }
-    else if (this.mode == ModeValue.PLAYGROUND) {
+    else if (this.settings.isPlaygroundMode()) {
       this.buildPlaygroundMenu();
     }
   }

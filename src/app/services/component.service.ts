@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
 import { ComponentModel } from '../models/component';
+import { GitHubApiService } from './github-api.service';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MarketplaceService } from './services/marketplace.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  // To load components for playground mode
+  constructor(private marketplace: MarketplaceService) {}
 
   ngOnInit() {
     // prevent empty links to reload the page

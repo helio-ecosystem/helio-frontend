@@ -69,7 +69,16 @@ export class TourService {
 
 
   tutorialContent(path: string): Observable<TutorialModel> {
-    return this.github.contentFile(this.BASE_PATH + path);
+    return new Observable<TutorialModel>(observable => {
+      this.github.contentFile(this.BASE_PATH + path).subscribe({
+        next: (v) => {
+          var model = new TutorialModel(JSON.parse(JSON.stringify(v)));
+          observable.next(model);
+        },
+        error: (e) => observable.error(e),
+        complete: () => observable.complete()
+      });
+    });
   }
 
   removeSpecialChars(value: string): string {
