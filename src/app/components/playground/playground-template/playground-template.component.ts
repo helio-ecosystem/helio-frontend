@@ -4,6 +4,8 @@ import { MappingService } from "../../../services/mapping.service";
 import { MappingModel } from "../../../models/mapping";
 import { TutorialModel } from 'src/app/models/tutorial';
 import { PlaygroundModule } from '../playground.module';
+import { ComponentService } from 'src/app/services/component.service';
+import { BUILDER_TYPE } from 'src/app/shared/component-types';
 
 @Component({
   selector: 'playground-template',
@@ -13,11 +15,18 @@ import { PlaygroundModule } from '../playground.module';
 })
 export class PlaygroundTemplateComponent implements OnChanges {
 
+  @Input() isTour: boolean = false;
   @Input() disabledArea: boolean;
+  @Input() mappingId: string;
   @Input() mapping: string;
+  @Input() builder: string;
   @Input() tutorialModel: TutorialModel;
 
+  private defaultBuilderType = 'Default';
+  builderTypes = [this.defaultBuilderType];
+
   mappingControl: FormControl;
+  builderControl: FormControl;
   mappingResults: string;
   mappingResultsSuccess: boolean;
   loadingMapping: boolean;
@@ -25,13 +34,31 @@ export class PlaygroundTemplateComponent implements OnChanges {
   private model: MappingModel =
     new MappingModel({ id: PlaygroundModule.mappingId, mappingProcessor: '', threads: 1, body: '' });
 
-  constructor(private service : MappingService) {
+  constructor(
+    private service : MappingService,
+    private components: ComponentService)
+  {
     this.mappingControl = new FormControl({ value: '', disabled: false });
+    this.builderControl = new FormControl({ 
+        value: this.builder ? this.builder : this.builderTypes[0],
+        disabled: false
+    });
+    this.components.getComponentsByType(BUILDER_TYPE).subscribe({
+      next: (v) => {
+        this.builderTypes = v.map(c => c.clazz.split('.').pop());
+        if (this.tutorialModel && this.builderTypes.findIndex(b => b == this.tutorialModel.builder) != -1) {
+          this.builderControl.setValue(this.tutorialModel.builder);
+        }
+        else {
+          this.builderControl.setValue(this.builderTypes[0]);
+        }
+      }
+    });
   }
 
   evaluateMapping() {
     this.model.body = this.mappingControl.value;
-    this.model.mappingProcessor = this.tutorialModel ? this.tutorialModel.builder : null;
+    this.model.mappingProcessor = this.builderControl.value != this.defaultBuilderType ? this.builderControl.value : null;
     this.loadingMapping = true;
     this.mappingResults = null;
     this.mappingResultsSuccess = null;
@@ -82,8 +109,18 @@ export class PlaygroundTemplateComponent implements OnChanges {
       if (changes['mapping']) {
         this.mappingControl.setValue(changes['mapping'].currentValue);
       }
+      if (changes['builder']) {
+        this.builderControl.setValue(changes['builder'].currentValue);
+      }
+      if (changes['mappingId']) {
+        this.model.id = changes['mappingId'].currentValue;
+      }
       if (changes['tutorialModel']) {
         this.mappingControl.setValue(changes['tutorialModel'].currentValue.user_template);
+        this.tutorialModel && this.tutorialModel.builder ? this.tutorialModel.builder : this.builderTypes[0];
+        if (this.tutorialModel.builder) {
+          this.builderControl.setValue(this.tutorialModel.builder);
+        }
       }
       if (changes['disabledArea']) {
         var val = this.mappingControl.value;

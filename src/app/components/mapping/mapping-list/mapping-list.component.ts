@@ -74,11 +74,11 @@ export class MappingListComponent {
 
   private addRowInTable(newData: MappingModel) {
     var d: MappingModel = new MappingModel(JSON.parse(JSON.stringify(newData)));
-    if (d.id && d.id != PlaygroundModule.mappingId) {
+    if (d.id && (d.id != PlaygroundModule.mappingId && d.id != MappingModule.mappingId)) {
       this.data.push([d.id, d.mappingProcessor, 
         '<a target="_blank" href="' + environment.host + '/api/' + d.id + '/data' + '">Get data value</a>']);
     }
-    else if (newData.id && newData.id != PlaygroundModule.mappingId) {
+    else if (newData.id && (newData.id != PlaygroundModule.mappingId && newData.id != MappingModule.mappingId)) {
       this.data.push([newData.id, newData.mappingProcessor, 
         '<a target="_blank" href="' + environment.host + '/api/' + newData.id + '/data' + '">Get data value</a>']);
     }
@@ -98,7 +98,7 @@ export class MappingListComponent {
   }
   
   create() {
-    const dialogRef = this.dialog.open(MappingFormDialogComponent);
+    const dialogRef = this.dialog.open(MappingFormDialogComponent, { maxHeight: window.innerHeight + 'px' });
     dialogRef.afterClosed().subscribe((result: MappingModel) => {
       if (result) {
         this.addRowInTable(result);
