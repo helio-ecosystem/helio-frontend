@@ -12,7 +12,7 @@ import { StorageService } from './storage.service';
 })
 export class MarketplaceService {
 
-  private defaultPath = 'components.json';
+  private defaultPath = 'config/components.json';
 
   constructor(
     private storage: StorageService,
@@ -22,7 +22,6 @@ export class MarketplaceService {
   {
     if (this.settings.isPlaygroundMode() && !this.storage.isLoaded()) {
       this.storage.setLoaded();
-      console.log('LOAD COMPONENTES');
       let componentsInstalled = this.components.list();
       let componentsDescribed = this.github.contentFile(this.defaultPath)
 
@@ -54,14 +53,11 @@ export class MarketplaceService {
     componentsDescribed.forEach(component => {
       let componentInstalled = componentsInstalled.find(c => isSameComponent(c, component));
 
-      if (componentInstalled && needToReplaceComponent(componentInstalled, component)) {
+      if (!componentInstalled || (componentInstalled && needToReplaceComponent(componentInstalled, component))) {
         componentsToInstall.push(component);
       }
       else if (componentInstalled) {
         componentsInstalled = componentsInstalled.filter(c => c.id !== componentInstalled.id);
-      }
-      else {
-        componentsToInstall.push(component);
       }
     });
 
