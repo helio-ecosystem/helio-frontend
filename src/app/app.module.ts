@@ -6,6 +6,7 @@ import { RoutesModule } from './routes/routes.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from "@angular/common/http";
+import { MarketplaceService } from './services/marketplace.service';
 
 
 @NgModule({

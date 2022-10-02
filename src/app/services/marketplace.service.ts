@@ -4,6 +4,8 @@ import { ComponentModel } from '../models/component';
 import { GitHubApiService } from './github-api.service';
 import { SettingsService } from './settings.service';
 import { ComponentService } from './component.service';
+import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,14 @@ export class MarketplaceService {
   private defaultPath = 'components.json';
 
   constructor(
+    private storage: StorageService,
     private github: GitHubApiService,
     private settings: SettingsService,
     private components: ComponentService)
   {
-    if (this.settings.isPlaygroundMode()) {
+    if (this.settings.isPlaygroundMode() && !this.storage.isLoaded()) {
+      this.storage.setLoaded();
+      console.log('LOAD COMPONENTES');
       let componentsInstalled = this.components.list();
       let componentsDescribed = this.github.contentFile(this.defaultPath)
 
@@ -27,14 +32,10 @@ export class MarketplaceService {
     }
   }
 
-  private loadComponentsForPlaygroundMode(componentsInstalled: ComponentModel[], componentsDescribed: any[]) {
-    console.log('--- Components installed ---');
-    console.log(componentsInstalled);
 
-    console.log('--- Components described ---');
+  private loadComponentsForPlaygroundMode(componentsInstalled: ComponentModel[], componentsDescribed: any[]) {
     componentsDescribed = componentsDescribed.map(c => 
       new ComponentModel({id: null, clazz: c['clazz'], source: c['source'], type: c['type']}));
-    console.log(componentsDescribed);
 
     let isSameComponent = (installed: ComponentModel, described: ComponentModel) => {
       return installed.clazz === described.clazz && installed.type === described.type;
@@ -64,17 +65,10 @@ export class MarketplaceService {
       }
     });
 
-    forkJoin(componentsToInstall.map(c => this.components.addComponent(c)))
-      .subscribe(data => {
-        console.log('-- Components to install --');
-        console.log(data);
-    });
-
-    forkJoin(componentsInstalled.map(c => this.components.deleteComponent(c.id)))
-      .subscribe(data => {
-        console.log('Components to uninstall');
-        console.log(data);
-    });
+    forkJoin(
+      componentsToInstall.map(c => this.components.addComponent(c)).concat(
+      componentsInstalled.map(c => this.components.deleteComponent(c.id)))
+      ).subscribe(data => {});
   }
 
 }
