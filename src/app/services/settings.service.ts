@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SettingsService {
 
-  public static APP_VERSION = 'v0.0.3';
+  public static APP_VERSION = 'v0.1.0';
   private mode = environment.mode;
 
   private subjectOnChangeSection: Subject<string> = new Subject<string>();
