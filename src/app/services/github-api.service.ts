@@ -8,7 +8,7 @@ import { TutorialModel } from '../models/tutorial';
 })
 export class GitHubApiService {
 
-  private repository = 'EmilioCrespoPeran/sample/';
+  private repository = 'helio-ecosystem/helio-ecosystem/';
   private host = 'https://api.github.com/repos/' + this.repository;
   private branch = 'main';
   

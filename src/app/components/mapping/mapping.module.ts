@@ -62,4 +62,5 @@ const routes: Routes = [
 export class MappingModule {
   static section = 'Mappings';
   static uri = '/mappings';
+  static mappingId = 'mapping';
 }

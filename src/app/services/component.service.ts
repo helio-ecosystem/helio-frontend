@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from './rest.service';
 import { ComponentModel } from '../models/component';
-import { GitHubApiService } from './github-api.service';
-import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +37,16 @@ export class ComponentService extends RestService {
 
   deleteComponent(componentId: string): Observable<any> {
     return super.delete('/component/' + componentId);
+  }
+
+  getComponentsByType(type: string): Observable<ComponentModel[]> {
+    return new Observable<ComponentModel[]>(observable => {
+      this.list().subscribe({
+        next: (v) => observable.next(v.filter(c => c.type == type)),
+        error: (e) => observable.error(e),
+        complete: () => observable.complete()
+      });
+    });
   }
 
 }

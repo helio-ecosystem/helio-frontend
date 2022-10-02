@@ -26,14 +26,18 @@ export class TourService {
             var tutorialSections: TutorialSection[] = [];
             files['tree'].forEach(file => {
               var isInPath = file['path'].startsWith(this.BASE_PATH);
+              var oneDeepLevelDir = isInPath && file['type'] == this.DIR_TYPE 
+                && file['path'].replace(this.BASE_PATH, '').split('/').length == 0;
+              var oneDeepLevelFile = isInPath && file['type'] == this.FILE_TYPE
+                && file['path'].replace(this.BASE_PATH, '').split('/').length == 2;
 
               // Only we manage one-level-deep
-              if (isInPath && file['type'] == this.DIR_TYPE) {
+              if (oneDeepLevelDir) {
                   var item = new TutorialSection();
                   item.name = this.removeSpecialChars(file['path'].replace(this.BASE_PATH, ''));
                   tutorialSections.push(item);
               }
-              else if (isInPath && file['type'] == this.FILE_TYPE) {
+              else if (oneDeepLevelFile) {
                   var relativePath = file['path'].replace(this.BASE_PATH, '').split('/');
                   var parentName = this.removeSpecialChars(relativePath[0]);
                   var childName = this.removeSpecialChars(relativePath[1]).replace('.json', '');
