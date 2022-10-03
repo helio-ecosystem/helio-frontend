@@ -6,6 +6,8 @@ import { SettingsService } from 'src/app/services/settings.service';
 import { SecurityService } from 'src/app/services/security.service';
 import { MappingModule } from '../mapping.module';
 import { PlaygroundModule } from '../../playground/playground.module';
+import { ComponentService } from 'src/app/services/component.service';
+import { BUILDER_TYPE } from 'src/app/shared/component-types';
 
 @Component({
   templateUrl: './mapping-details.component.html',
@@ -25,7 +27,8 @@ export class MappingDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private settings: SettingsService,
-    private service: MappingService)
+    private service: MappingService,
+    private components: ComponentService)
   {
     this.security.redirectIfSectionUnavailable(MappingModule.section);
     this.settings.setSection(MappingModule.section);

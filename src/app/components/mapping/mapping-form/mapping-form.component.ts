@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MappingModel } from 'src/app/models/mapping';
+import { ComponentService } from 'src/app/services/component.service';
 import { MappingService } from 'src/app/services/mapping.service';
+import { BUILDER_TYPE } from 'src/app/shared/component-types';
 
 @Component({
   selector: 'app-mapping-form',
@@ -21,23 +23,33 @@ export class MappingFormComponent implements OnChanges {
   private auxMappingData: MappingModel;
 
   fontSizeControl: FormControl;
+  
   disabledFormFieldsInEditionMode = {};
 
+  private defaultBuilderType = 'Default';
+  builderTypes = [this.defaultBuilderType];
+  isSaving = false;
 
   constructor(
     private fb: FormBuilder,
+    private components: ComponentService,
     private service: MappingService)
   {
     this.fontSizeControl = new FormControl(15);
-      this.auxMappingData = new MappingModel({
-        id: '',
-        mappingProcessor: '',
-        body: '',
-        threads: 1
-      });
+    this.auxMappingData = new MappingModel({
+      id: '',
+      mappingProcessor: '',
+      body: '',
+      threads: 1
+    });
 
-      this.disabledFormFieldsInEditionMode['name'] = false;
-      this.disabledFormFieldsInEditionMode['mapping'] = false;
+    this.disabledFormFieldsInEditionMode['name'] = false;
+    this.disabledFormFieldsInEditionMode['builder'] = false;
+    this.disabledFormFieldsInEditionMode['mapping'] = false;
+    
+    this.components.getComponentsByType(BUILDER_TYPE).subscribe({
+      next: (v) => this.builderTypes = v.map(c => c.clazz.split('.').pop())
+    });
   }
 
 
@@ -70,6 +82,12 @@ export class MappingFormComponent implements OnChanges {
       'name': isEditionMode && !this.disabledFormFieldsInEditionMode['name']
           ? [this.auxMappingData.id, Validators.required]
           : new FormControl({ value: this.auxMappingData.id, disabled: true }),
+      'builder': isEditionMode && !this.disabledFormFieldsInEditionMode['builder']
+          ? [this.auxMappingData.mappingProcessor, Validators.required]
+          : new FormControl({
+              value: this.auxMappingData.mappingProcessor != this.defaultBuilderType 
+                ? this.auxMappingData.mappingProcessor : this.builderTypes[0],
+              disabled: true }),
       'mapping': isEditionMode && !this.disabledFormFieldsInEditionMode['mapping']
           ? [this.auxMappingData.body, Validators.required]
           : new FormControl({ value: this.auxMappingData.body, disabled: true }) 
@@ -80,10 +98,18 @@ export class MappingFormComponent implements OnChanges {
   saveMapping() {
     this.error = null;
     if (this.form.valid) {
+      this.isSaving = true;
       this.auxMappingData.body = this.form.controls['mapping'].value;
+      this.auxMappingData.mappingProcessor = this.form.controls['builder'].value;
       this.service.add(this.auxMappingData).subscribe({
-        next: (v) => this.onDataChanged.emit(this.auxMappingData),
-        error: (e) => this.error = JSON.parse(e['error']).message
+        next: (v) => {
+          this.onDataChanged.emit(this.auxMappingData);
+          this.isSaving = false;
+        },
+        error: (e) => {
+          this.error = JSON.parse(e['error']).message;
+          this.isSaving = false;
+        }
       });
     }
     else {
