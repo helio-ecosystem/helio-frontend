@@ -37,7 +37,7 @@
             <mat-expansion-panel hideToggle *ngFor="let section of tutorialSections;" class="mat-elevation-z0 border">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <b>{{ section.name | titlecase }}</b>
+                  <b>{{ section.name }}</b>
                 </mat-panel-title>
               </mat-expansion-panel-header>
 
@@ -46,11 +46,11 @@
                 <ng-container *ngFor="let tutorial of section.child;">
                   <a *ngIf="tutorialSelected && section.name == sectionName && tutorial.name == tutorialName"
                     mat-list-item>
-                    <b>{{ tutorial.name | titlecase }} (Current selected)</b>
+                    <b>{{ tutorial.name }} (Current selected)</b>
                   </a>
                   <a *ngIf="!(tutorialSelected && section.name == sectionName && tutorial.name == tutorialName)"
                     mat-list-item href="{{ '/tour/' + tutorial.path }}">
-                    {{ tutorial.name | titlecase }}
+                    {{ tutorial.name }}
                   </a>
                 </ng-container>
 
