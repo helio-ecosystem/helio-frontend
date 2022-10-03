@@ -15,6 +15,7 @@ import { BUILDER_TYPE } from 'src/app/shared/component-types';
 })
 export class PlaygroundTemplateComponent implements OnChanges {
 
+  @Input() needBuilder: boolean = true;
   @Input() isTour: boolean = false;
   @Input() disabledArea: boolean;
   @Input() mappingId: string;

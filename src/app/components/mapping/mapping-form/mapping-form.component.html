@@ -24,12 +24,21 @@
       </div>
 
 
-      <div class="col-12 mb-3">
+      <div class="col-6 mb-3">
         <mat-form-field appearance="outline">
           <mat-label>Mapping name</mat-label>
           <input matInput placeholder="Type the mapping name" formControlName="name" required>
         </mat-form-field>
+      </div>
 
+      <div class="col-6 mb-3">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Builder</mat-label>
+          <mat-select formControlName="builder" required>
+            <mat-option *ngFor="let type of builderTypes;" value="{{ type }}">{{ type }}</mat-option>
+          </mat-select>
+          <mat-hint>Select the builder to perform the mapping</mat-hint>
+        </mat-form-field>
       </div>
 
 
@@ -47,7 +56,7 @@
 
 
       <div class="col-12 mt-2" *ngIf="editionMode">
-        <a mat-flat-button class="btn success-btn" (click)="saveMapping()">Save mapping</a>
+        <a mat-flat-button class="btn success-btn" [disabled]="isSaving" (click)="saveMapping()">Save mapping</a>
       </div>
   
 
