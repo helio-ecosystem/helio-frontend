@@ -8,7 +8,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatLineModule} from "@angular/material/core";
 import {MatCardModule} from "@angular/material/card";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { CodeEditorModule } from '@ngstack/code-editor';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { TourSectionComponent } from './tour-section/tour-section.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
     MatListModule,
     FormsModule,
     ReactiveFormsModule,
-    CodeEditorModule.forRoot(),
     MatProgressBarModule,
     MatExpansionModule,
     PlaygroundExportModule

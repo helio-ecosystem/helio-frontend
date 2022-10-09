@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
 
-  protected host: string = environment.host;
+  protected host: string;
 
   protected jsonHeaders = {
     headers: new HttpHeaders({
@@ -28,7 +28,9 @@ export class RestService {
     responseType: 'text'
   };
 
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient, private service: ConfigService) {
+    this.host = this.service.readConfig().host;
+  }
 
   protected get(uri: string, headers?: any): Observable<any> {
     return this.http.get(this.host + uri, headers != null ? headers : this.jsonHeaders);

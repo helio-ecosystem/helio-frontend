@@ -1,0 +1,4 @@
+{
+    "host": "${HELIO_REST_HOST}",
+    "mode": "${HELIO_MODE}"
+}

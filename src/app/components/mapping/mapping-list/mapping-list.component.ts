@@ -12,6 +12,7 @@ import { MappingFormDialogComponent } from '../mapping-form-dialog/mapping-form-
 import { MappingDeteleDialogComponent } from '../mapping-detele-dialog/mapping-detele-dialog.component';
 import { environment } from 'src/environments/environment';
 import { PlaygroundModule } from '../../playground/playground.module';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-mapping-list',
@@ -37,13 +38,17 @@ export class MappingListComponent {
   error: string = '';
   notification = null;
 
+  private host: string;
+
   constructor(
     private security: SecurityService,
     private settings: SettingsService,
     private service: MappingService,
+    private config: ConfigService,
     private router: Router,
     private dialog: MatDialog)
   {
+    this.host = this.config.readConfig().host;
     this.security.redirectIfSectionUnavailable(MappingModule.section);
     this.settings.setSection(MappingModule.section);
     this.search();
@@ -76,11 +81,11 @@ export class MappingListComponent {
     var d: MappingModel = new MappingModel(JSON.parse(JSON.stringify(newData)));
     if (d.id && (d.id != PlaygroundModule.mappingId && d.id != MappingModule.mappingId)) {
       this.data.push([d.id, d.mappingProcessor, 
-        '<a target="_blank" href="' + environment.host + '/api/' + d.id + '/data' + '">Get data value</a>']);
+        '<a target="_blank" href="' + this.host + '/api/' + d.id + '/data' + '">Get data value</a>']);
     }
     else if (newData.id && (newData.id != PlaygroundModule.mappingId && newData.id != MappingModule.mappingId)) {
       this.data.push([newData.id, newData.mappingProcessor, 
-        '<a target="_blank" href="' + environment.host + '/api/' + newData.id + '/data' + '">Get data value</a>']);
+        '<a target="_blank" href="' + this.host + '/api/' + newData.id + '/data' + '">Get data value</a>']);
     }
   }
 

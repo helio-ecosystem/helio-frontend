@@ -8,7 +8,6 @@ import {MatLineModule} from "@angular/material/core";
 import {MatCardModule} from "@angular/material/card";
 import {PlaygroundTemplateComponent} from "./playground-template/playground-template.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { CodeEditorModule } from '@ngstack/code-editor';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,7 +28,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    CodeEditorModule.forRoot(),
     MatProgressBarModule,
     MatExpansionModule
   ],

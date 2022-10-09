@@ -6,7 +6,6 @@ import { ModeValue } from "src/app/shared/mode-value";
 
 export const environment = {
   production: false,
-  host: 'http://localhost:4567',
   mode: ModeValue.APP
 };
 
