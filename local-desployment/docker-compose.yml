@@ -11,19 +11,27 @@ services:
       - "4567:4567"
 
   frontend:
-    image: emiliocrespoperan/helio-frontend:latest
+    image: emiliocrespoperan/helio-frontend:beta
     depends_on:
       - helio-rest
     ports:
       - "4201:80"
+    environment:
+      - HELIO_REST_HOST=http://localhost:4567
+
+      
 
   playground:
-    image: emiliocrespoperan/helio-frontend-playground:latest
+    image: emiliocrespoperan/helio-frontend:beta
     depends_on:
       - helio-rest
     ports:
       - "4202:80"
-        
+    environment:
+      - HELIO_REST_HOST=http://localhost:4567
+      - HELIO_MODE=PLAYGROUND
+      
 volumes:
   helio-db:
     name: helio-db
+
