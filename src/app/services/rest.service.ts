@@ -30,6 +30,9 @@ export class RestService {
 
   constructor(protected http: HttpClient, private service: ConfigService) {
     this.host = this.service.readConfig().host;
+    if (this.host.trim().length == 0)  {
+      this.host = "http://localhost:4567";
+    }
   }
 
   protected get(uri: string, headers?: any): Observable<any> {
