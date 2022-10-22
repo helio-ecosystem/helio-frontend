@@ -1,9 +1,8 @@
 <div class="row">
 
   <div class="col-12 mb-3" *ngIf="tutorialModel">
-    <h2>Description</h2>
-    <p class="mb-4">{{ tutorialModel.description }}</p>
-
+    <h2>Tutorial description</h2>
+    <div class="mt-4 mb-4" [innerHtml]="tutorialModel.description"></div>
     <mat-accordion class="mt-4">
       <mat-expansion-panel class="mat-elevation-z0 border"
         style="background-color: white !important;">

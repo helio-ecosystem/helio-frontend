@@ -3,6 +3,7 @@ import { GitHubApiService } from './github-api.service';
 import { Observable } from 'rxjs';
 import { TutorialSection } from '../models/tutorial-section';
 import { TutorialModel } from '../models/tutorial';
+import showdown from 'showdown';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class TourService {
   private DIR_TYPE = 'tree';
   private FILE_TYPE = 'blob';
 
-  constructor(private github: GitHubApiService) {}
+  private markdownConversor;
+
+  constructor(private github: GitHubApiService) {
+    this.markdownConversor = new showdown.Converter();
+  }
 
 
   tourDirectory(): Observable<TutorialSection[]> {
@@ -77,6 +82,8 @@ export class TourService {
       this.github.contentFile(this.BASE_PATH + path).subscribe({
         next: (v) => {
           var model = new TutorialModel(JSON.parse(JSON.stringify(v)));
+          // Transform markdown text to html
+          model.description = this.markdownConversor.makeHtml(model.description);
           observable.next(model);
         },
         error: (e) => observable.error(e),
