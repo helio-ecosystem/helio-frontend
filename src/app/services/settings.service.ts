@@ -8,7 +8,7 @@ import { ConfigService } from './config.service';
 })
 export class SettingsService {
 
-  public static APP_VERSION = 'v0.1.2';
+  public static APP_VERSION = 'v0.1.3';
   private mode: string;
   private subjectOnChangeSection: Subject<string> = new Subject<string>();
 
