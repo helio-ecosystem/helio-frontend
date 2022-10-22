@@ -13,8 +13,6 @@
     </thead>
 
     <tbody>
-    <ng-container *ngIf="table.rows">
-
         <tr *ngFor="let row of table.rows; let i = index">
             <td colspan="2" *ngFor="let column of columns; let j = index" style="vertical-align: middle;">
                 <div [innerHtml]="row[j]"></div>
@@ -28,12 +26,10 @@
             </td>
         </tr>
 
-    </ng-container>
 
-    <tr *ngIf="!table.rows">
-        <td>No data found</td>
-    </tr>
-
+        <tr *ngIf="table.rows.length == 0">
+            <td [attr.colspan]="100" class="p-4" style="text-align: center;">No data found</td>
+        </tr>
     </tbody>
 </table>
 

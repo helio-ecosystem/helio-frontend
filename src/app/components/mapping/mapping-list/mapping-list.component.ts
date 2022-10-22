@@ -86,6 +86,8 @@ export class MappingListComponent {
     else if (newData.id && (newData.id != PlaygroundModule.mappingId && newData.id != MappingModule.mappingId)) {
       this.data.push([newData.id, newData.mappingProcessor, 
         '<a target="_blank" href="' + this.host + '/api/' + newData.id + '/data' + '">Get data value</a>']);
+      // This add event 'onChanges' over the array
+      this.data = [].concat(this.data);
     }
   }
 
