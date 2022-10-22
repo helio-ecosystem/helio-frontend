@@ -24,11 +24,11 @@ export class MappingService extends RestService {
           // Retrieves mapping details
           this.mappingDetails(id).subscribe({
             next: (v2) => { mapping.body = v2; observer.next(mapping); },
-            error: (e2) => observer.error('Mapping was found but not it details (error: ' + JSON.stringify(e2) + ')')
+            error: (e2) => observer.error(JSON.stringify(e2))
           });
 
         },
-        error: (e) => observer.error('Mapping not found (' + JSON.stringify(e) + ')')
+        error: (e) => observer.error(JSON.stringify(e))
       });
     });
 

@@ -83,7 +83,7 @@
 
           <div class="col-12 mb-5" style="text-align: center">
             <button mat-stroked-button matStepperPrevious>Back</button>
-            <a mat-flat-button class="success-btn btn-space-left" [disabled]="!firstFormStep.valid" (click)="saveMapping()">Save mapping</a>
+            <a mat-flat-button class="success-btn btn-space-left" [disabled]="!firstFormStep.valid || disableButton" (click)="saveMapping()">Save mapping</a>
           </div>
         </div>
 

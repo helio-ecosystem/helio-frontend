@@ -23,6 +23,7 @@ export class MappingFormDialogComponent {
   firstFormStep: FormGroup;
   fontSizeControl;
   errorLastStep: string;
+  disableButton = false;
   
   public model: MappingModel =
     new MappingModel({ id: MappingModule.mappingId, mappingProcessor: '', threads: 1, body: '' });
@@ -62,26 +63,46 @@ export class MappingFormDialogComponent {
   saveMapping() {
     this.errorLastStep = null;
     if (this.firstFormStep.valid) {
+      this.disableButton = true;
       this.model.id = this.firstFormStep.controls['name'].value;
       this.model.mappingProcessor = this.firstFormStep.controls['builder'].value != this.defaultBuilderType
           ? this.firstFormStep.controls['builder'].value : null;
       this.model.body = this.firstFormStep.controls['mapping'].value;
 
       this.service.details(this.model.id).subscribe({
-        next: (v) => this.errorLastStep = 'Error: Mapping name has already exists.',
+        next: (v) => {
+          this.errorLastStep = 'Error: Mapping name has already exists.';
+          this.disableButton = false;
+        },
         error: (e) => {
-          this.service.add(this.model).subscribe({
-            next: (v) => {
-              var dataValue = JSON.parse(v);
-              this.model.mappingProcessor = dataValue.mappingProcessor;
-              this.model.threads = dataValue.threads;
-              this.dialog.close(this.model);
-            },
-            error: (e) => {
-              //this.errorLastStep = 'Error: ' + JSON.stringify(e);
-              this.dialog.close(this.model);
-            }
-          });
+          var result = JSON.parse(e);
+          if (result['error']['code'] == 404) {
+            this.service.add(this.model).subscribe({
+              next: (v) => {
+                var dataValue = JSON.parse(v);
+                this.model.mappingProcessor = dataValue.mappingProcessor;
+                this.model.threads = dataValue.threads;
+                this.disableButton = false;
+                this.dialog.close(this.model);
+              },
+              error: (e2) => {
+                this.service.remove(this.model.id).subscribe({
+                  next: (v3) => {
+                    this.errorLastStep = JSON.parse(e2['error'])['message'];
+                    this.disableButton = false;
+                  },
+                  error: (e3) => {
+                    this.errorLastStep = JSON.parse(e2['error'])['message'];
+                    this.disableButton = false;
+                  }
+                });
+              }
+            });
+          } 
+          else {
+            this.errorLastStep = result['message'];
+            this.disableButton = false;
+          }
         }
       });
     }
