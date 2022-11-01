@@ -44,9 +44,7 @@ export class MenuService {
 
   private buildAppMenu() {
     var sectionMarketplace = new MenuOptionModel('storefront', MarketplaceModule.section, MarketplaceModule.uri);
-    var sectionMapping = new MenuOptionModel('description', MappingModule.section, '');
-    var subSectionMapping = new MenuOptionModel('', 'List', MappingModule.uri);
-    sectionMapping.addChild(subSectionMapping);
+    var sectionMapping = new MenuOptionModel('description', MappingModule.section, MappingModule.uri);
 
     this.menu = [];
     this.menu.push(sectionMarketplace);
