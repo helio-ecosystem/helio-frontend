@@ -82,6 +82,10 @@ export class TourService {
       this.github.contentFile(this.BASE_PATH + path).subscribe({
         next: (v) => {
           var model = new TutorialModel(JSON.parse(JSON.stringify(v)));
+          // Setup a tutorial builder by default
+          if (!model.builder) {
+            model.builder = 'SIoTRxBuilder';
+          }
           // Transform markdown text to html
           model.description = this.markdownConversor.makeHtml(model.description);
           observable.next(model);

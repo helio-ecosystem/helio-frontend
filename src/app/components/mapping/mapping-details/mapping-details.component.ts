@@ -50,8 +50,11 @@ export class MappingDetailsComponent implements OnInit {
     }
   }
 
-  changedMapping(data) {
-    this.mapping = data;
+  changedMapping(data: MappingModel) {
+    this.mapping.id = data.id;
+    this.mapping.body = data.body;
+    this.mapping.mappingProcessor = data.mappingProcessor;
+    this.mapping.threads = data.threads;
     this.notificationSaved = 'Mapping has been saved successfully!';
     setTimeout(() => this.notificationSaved = null, 5000);
   }

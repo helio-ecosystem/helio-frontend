@@ -47,11 +47,14 @@ export class PlaygroundTemplateComponent implements OnChanges {
     this.components.getComponentsByType(BUILDER_TYPE).subscribe({
       next: (v) => {
         this.builderTypes = v.map(c => c.clazz.split('.').pop());
-        if (this.tutorialModel && this.builderTypes.findIndex(b => b == this.tutorialModel.builder) != -1) {
-          this.builderControl.setValue(this.tutorialModel.builder);
-        }
-        else {
-          this.builderControl.setValue(this.builderTypes[0]);
+        // Check if OnChanges hook modify the builderControl value
+        if (this.builderControl.value == this.defaultBuilderType) {
+          if (this.tutorialModel && this.builderTypes.findIndex(b => b == this.tutorialModel.builder) != -1) {
+            this.builderControl.setValue(this.tutorialModel.builder);
+          }
+          else {
+            this.builderControl.setValue(this.builderTypes[0]);
+          }
         }
       }
     });
@@ -118,9 +121,15 @@ export class PlaygroundTemplateComponent implements OnChanges {
       }
       if (changes['tutorialModel']) {
         this.mappingControl.setValue(changes['tutorialModel'].currentValue.user_template);
-        this.tutorialModel && this.tutorialModel.builder ? this.tutorialModel.builder : this.builderTypes[0];
-        if (this.tutorialModel.builder) {
+
+        if (this.builderTypes.includes(changes['tutorialModel'].currentValue.builder)) {
+          this.builderControl.setValue(changes['tutorialModel'].currentValue.builder);
+        }
+        else if (this.builderTypes.includes(this.tutorialModel.builder)) {
           this.builderControl.setValue(this.tutorialModel.builder);
+        }
+        else {
+          this.builderControl.setValue(this.builderTypes[0]);
         }
       }
       if (changes['disabledArea']) {
