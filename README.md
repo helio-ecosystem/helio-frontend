@@ -18,56 +18,41 @@ This docker image has the following docker environment variables:
 Use docker compose with the following recipe if you want the  version for this project:
 
 ```yml
-version: '2'
+version: '3'
 services:
-  helio-rest:
+  helio-publisher:
     image: acimmino/helio-rest:latest
     volumes: 
-      - type: volume
-        source: helio-db
-        target: /helio/app
-        volume: {}
+      - ./local/:/usr/src/app/local/
+      - ./db/:/usr/src/app/db/
     ports:
       - "4567:4567"
-
   frontend:
     image: emiliocrespoperan/helio-frontend:latest
     depends_on:
       - helio-rest
     ports:
       - "4201:80"
-
-volumes:
-  helio-db:
-    name: helio-db
 ```
 
 Otherwise, if you want a minimal application to learn about [Helio-Ecosystem](https://github.com/helio-ecosystem), use this docker compose instead:
 
 ```yml
-version: '2'
+version: '3'
 services:
-  helio-rest:
+  helio-publisher:
     image: acimmino/helio-rest:latest
     volumes: 
-      - type: volume
-        source: helio-db
-        target: /helio/app
-        volume: {}
+      - ./local/:/usr/src/app/local/
+      - ./db/:/usr/src/app/db/
     ports:
       - "4567:4567"
-
-  playground:
+  frontend:
     image: emiliocrespoperan/helio-frontend:latest
     depends_on:
       - helio-rest
     ports:
-      - "4202:80"
-    environment:
+      - "4201:80"
       - HELIO_REST_HOST=http://localhost:4567
       - HELIO_MODE=PLAYGROUND
-      
-volumes:
-  helio-db:
-    name: helio-db
 ```
