@@ -65,6 +65,4 @@ This project has been partially funded by:
  | <img src="https://github.com/helio-ecosystem/helio-ecosystem/assets/4105186/c9081c01-69ed-4ba3-aa1a-fddbaaee19c1" height="80"/>   | The European project [AURORAL](https://www.auroral.eu/) from the European Union's Horizont 2020 research and innovation programme under grant agreement Nº101016854. |
  | <img src="https://github.com/helio-ecosystem/helio-ecosystem/assets/4105186/f1cde449-266f-45f4-a5da-e9c6006f5f3f" height="80"/>  | The European project [COGITO](https://cogito-project.eu/) from the European Union's Horizont 2020 research and innovation programme under grant agreement Nº958310. |
 
- | Institution       | Grant |
- |   :---:      |      :---      |
- | <img src="https://github.com/helio-ecosystem/helio-frontend/assets/4105186/7456e9d1-a74f-4baa-b83c-6d9f5d9027ec)" height="80"/>  | Collaboration grant from the Education Innovation Program of the Universidad Politécnica de Madrid. |
+ 
